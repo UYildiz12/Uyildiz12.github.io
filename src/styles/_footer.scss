@@ -1,21 +1,55 @@
 .footer {
-  background: $main;
+  background: #ffffff;
   padding: 10px 0;
   margin-top: 100px;
   text-align: center;
-  color: #FFF;
+  color: #000;
+  p {
+    font-size: 18px;
+    margin-right: 10px;
+  }
   .love {
     color: red;
   }
   a {
     text-decoration: none;
     margin: 0;
-    color: #FFF;
+    color: #000;
+    transition: all 0.4s ease;
+    position: relative;
+    display: inline-block;
     &:hover{
       color: $sec;
     }
     &:active {
       color: $sec;
+    }
+  }
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    color: #000 !important;
+    font-size: 20px;
+    margin: 0 5px;
+    &.fa-graduation-cap::before {
+      transform: translateX(-3px);
+      display: inline-block;
     }
   }
 }

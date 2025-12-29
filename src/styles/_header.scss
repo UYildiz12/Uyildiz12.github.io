@@ -1,5 +1,5 @@
 #particles-js {
-  background: $main;
+  background: #ffffff;
   display: flex;
   vertical-align: bottom;
   width: 100%;
@@ -16,7 +16,7 @@
 .header {
   z-index: 1;
   text-align: center;
-  color:#FFF;
+  color:#000;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -27,7 +27,7 @@
     font-size: 50px;
     display: block;
     line-height: 1;
-    color: #FFF;
+    color: #000;
     @media only screen and (min-width:$cut){
       margin: 0;
       font-size: 100px;
@@ -37,7 +37,7 @@
     font-size: 20px;
     display: block;
     line-height: 1;
-    color: #FFF;
+    color: #000;
     margin-top: 10px;
     @media only screen and (min-width:$cut){
       font-size: 40px;
@@ -48,7 +48,7 @@
 .header-links {
   margin: 10px;
   .link {
-    color: #FFF;
+    color: #000;
     text-decoration: none;
     font-size: 15px;
     margin: 10px;
@@ -64,33 +64,38 @@
   text-align: center;
   .icon {
     text-align: center;
-    color: #FFF;
-    width: 20px;
+    color: #000;
     height: 20px;
-    font-size: 20px;
     padding: 10px;
     margin: 5px;
     border-radius: 50%;
-    border: 2px solid #FFF;
-    transition: all .7s;
+    border: 2px solid #000;
+    transition: all 0.7s;
+    position: relative;
+    width: 20px;
+    font-size: 20px;
     &:hover {
       color: $main;
-      background: #FFF;
+      background: #fff;
     }
     &:active {
       color: $main;
-      background: #FFF;
+      background: #fff;
     }
     @media only screen and (min-width:$cut) {
       width: 35px;
       height: 35px;
       font-size: 35px;
     }
+    &.fa-graduation-cap::before {
+      transform: translateX(-3px);
+      display: inline-block;
+    }
   }
 }
 
 .down {
-  color: #FFF;
+  color: #000;
   position: absolute;
   bottom: 25px;
   width: 100%;

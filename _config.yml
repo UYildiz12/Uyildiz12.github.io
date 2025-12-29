@@ -12,7 +12,7 @@ lang: en-US
 title: "Umur Yıldız"
 
 # A description of your site for meta tag, search engine results.
-description: "Personal Site"
+description: "Computational Neuroscience Research - Umur Yıldız"
 
 # The subpath of your site, e.g. /blog, for generating urls.
 baseurl: ""
@@ -58,7 +58,7 @@ paginate_path: '/page:num/'
 
 
 # Permalinks
-permalink: /:title
+permalink: /:title.html
 
 # Conversion
 markdown: kramdown

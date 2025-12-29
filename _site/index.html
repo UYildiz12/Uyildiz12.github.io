@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  
-<html lang="en">
   <head>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Umur Yıldız</title>
-    <meta name="description" content="Umur Yıldız">
-    <link rel="stylesheet" href="/assets/css/main.css">
-  </head>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Umur Yıldız</title>
+  <meta name="description" content="Umur Yıldız">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+
   <body>
       <div id="particles-js">
   <div class="header">
     <h1>
       <span class="site-title">Umur Yıldız</span>
-      <span class="site-description">Neuroscience & Machine Learning</span>
+      <span class="site-description">HRI & Neuroscience Researcher</span>
     </h1>
     <div class="header-icons">
       <a aria-label="Send email" href="mailto:umuryildiz_@outlook.com"><i class="icon fa fa-envelope"></i></a>
+      <a aria-label="My Google Scholar" target="_blank" href="https://scholar.google.com/citations?user=82q9bcMAAAAJ&hl=en"><i class="icon fa fa-graduation-cap" aria-hidden="true"></i></a>
       <a aria-label="My Twitter" target="_blank" href="https://x.com/Iudaincarnate"><i class="icon fa fa-twitter" aria-hidden="true"></i></a>
       <a aria-label="My Github" target="_blank" href="https://github.com/UYildiz12"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
+      <a aria-label="Download CV" target="_blank" href="/cv.pdf"><i class="icon fa fa-file-pdf-o" aria-hidden="true"></i></a>
     </div>
     <div class="header-links">
-      <a class="link" href="#about" data-scroll>About Me</a>
-      <a class="link" href="#projects" data-scroll>Projects</a>
+      <a class="link" href="#about" data-scroll>About</a>
+      <a class="link" href="#projects" data-scroll>Research</a>
       <a class="link" href="#posts" data-scroll>Posts</a>
     </div>
   </div>
@@ -39,68 +41,39 @@
         <body>
 <section id="about">
   <div class="user-details">
-    <h1>About Me</h1>
-    <p>I am a Psychology & Software Engineering student mainly interested in cross section of ML and Neuroscience.</p>
-    <div class="user">
-      <div class="tech">
-        <h2>Data Processing</h2>
-        <i class="devicon-python-plain colored"></i>  
-        <i class="devicon-pandas-plain-wordmark colored"></i>  
-        <i class="devicon-numpy-plain colored"></i>
-        <p>Expertise in data cleaning, preprocessing, and feature engineering using Python, 
-          Pandas, and NumPy to prepare datasets for machine learning models.</p>
-      </div>
-      <div class="tech">
-        <h2>Modeling</h2>
-        <i class="devicon-tensorflow-original colored"></i>
-        <i class="devicon-pytorch-original colored"></i>
-        <i class="devicon-scikitlearn-plain colored"></i>
-        <p>Proficient in developing and training various machine learning models 
-          using TensorFlow, PyTorch, and Scikit-learn for diverse applications.</p>
-      </div>
-      <div class="tech">
-        <h2>Deployment</h2>
-        <i class="devicon-docker-plain colored"></i>
-        <i class="devicon-amazonwebservices-plain-wordmark colored"></i>       
-        <i class="devicon-flask-original colored"></i>
-        <p>Skilled in deploying machine learning models to production environments using Docker, 
-          AWS, and Flask, ensuring scalability and efficiency of end-to-end ML projects.</p>
-      </div>
-    </div>
+    <h1>About</h1>
+    <p>I am an MSc student in Neuroscience at Bilkent University investigating computational approaches to understanding neural representation and visual processing. My research spans computational neuroscience and human-robot interaction, with a focus on machine learning for neural data and embodied AI. In computational neuroscience, I study visual processing, semantic encoding, action representation, and natural stimulus reconstruction using high-dimensional fMRI analysis. In HRI, I build LLM-powered Pepper robot systems for low-latency, multimodal interaction, including studies on mechanistic transparency that show the robot’s live reasoning on its tablet and on how embodiment, vision, and gesture shape trust in competitive interaction.</p>
+    <p><a href="/cv.pdf" target="_blank" style="text-decoration: underline; color: inherit;">Download CV (PDF)</a> | <a href="https://scholar.google.com/citations?user=82q9bcMAAAAJ&hl=en" target="_blank" style="text-decoration: underline; color: inherit;">Google Scholar Profile</a></p>
   </div>
 </section>
 </body>
+
       </section>
       <section id="projects">
-        <section id="projects">
   <div class="user-details">
-    <h1> Featured Projects </h1>
+    <h1>Research</h1>
   </div>
   <div class="user-projects">
     <div class="images-right">
-      <img alt="evosal" src="/assets/img/evosal.jpg" /> 
+      <img alt="interaction research" src="/assets/img/robotinteraction.png" /> 
     </div>
     <div class="contents">
-      <h3> Distinction of Evolutionarily Salient Categories in the Early Visual System via ML Methods </h3>
-      <p>This project investigates how the early visual system processes evolutionarily significant visual categories (faces, animacy, social context). Using LLaVA 1.6 & CLIP for image labeling, the project leverages RSA, dissimilarity and connectome-based analyses, and reliable voxel selection with classification/decoding to understand the role and accuracy of the early visual system.</p>
-      <a class="project-link" href="https://github.com/UYildiz12/Evosal">Check it out</a>
+      <h2><a href="#interaction-research" style="color: inherit; text-decoration: underline; cursor: pointer;">Human-Robot Interaction (HRI)</a></h2>
+      <p>My work in human-robot interaction (HRI) focuses on LLM-powered social robots for low-latency, real-time, multimodal interaction. I study how task-level mechanistic transparency that shows the robot’s live reasoning on its tablet affects trust and perceived reliability. I also investigate how embodiment factors such as physical presence, vision, and gesture shape trust in competitive interaction with Pepper.</p>
     </div>
   </div>
   <div class="user-projects">
     <div class="images-left">
-      <img alt="mountains" src="/assets/img/actionrep.jpg" />
+      <img alt="computational neuroscience" src="/assets/img/compneuro.png" />
     </div>
     <div class="contents-right">
-      <h3> Investigating Observed Actions In the Neural Representational Space </h3>
-      <p>In this project, I analyzed neural activity associated with various action categories presented in a dynamic, ecologically valid, and multi-actor video stimulus set. Employing a custom-built multi-arrangement paradigm, this project investigates how different action classes are
-        represented in the AON and explored the role of dynamic information. We also examined the relationship between perceptual similarity and neural representation, pinpointing action categories/subcategories based on neural and behavioral responses. 
-        The project utilizes searchlight-based multiple regression RSA, t-SNE, and UMAP with classification methods, alongside traditional univariate and multivariate analysis approaches. </p>
-        <a class="project-link" href="https://github.com/UYildiz12/ActionRep">Check it out</a>
+      <h2><a href="#computational-neuroscience" style="color: inherit; text-decoration: underline; cursor: pointer;">Computational Neuroscience</a></h2>
+      <p>My computational neuroscience research focuses on how the brain represents and processes information, with emphasis on visual perception, semantic encoding, action representation, and natural stimulus reconstruction. I use high-dimensional fMRI analysis and machine learning methods such as representational similarity analysis and multivariate pattern analysis to study category representations, action signals, and perceptual similarity in visual cortex.</p>
     </div>
   </div>
 </section>
-      </section>
-        <section id="posts">
+
+      <section id="posts">
   <div class="user-details">
     <h1>Latest Posts</h1>
   </div>
@@ -115,9 +88,9 @@
             <a class="tag" href="/tags#LLMs">LLMs</a>
           
         </div>
-        <h3 class="post-title"><a href="/Qlora-and-RAG-case-study-on-PsychoPy-with-Gemma-2-Model-family">QLoRA and RAG Case Study on PsychoPy with Gemma 2 27B</a></h3> 
+        <h3 class="post-title"><a href="/Qlora-and-RAG-case-study-on-PsychoPy-with-Gemma-2-Model-family.html">QLoRA and RAG Case Study on PsychoPy with Gemma 2 27B</a></h3> 
         <p class="post-preview">For the last 2 weeks, I’ve been trying to gather and synthetically generate data to use in fine-tuning and implementing...</p>
-        <a href="/Qlora-and-RAG-case-study-on-PsychoPy-with-Gemma-2-Model-family" class="post-link">Read More</a>
+        <a href="/Qlora-and-RAG-case-study-on-PsychoPy-with-Gemma-2-Model-family.html" class="post-link">Read More</a>
       </div>
      
       <div class="post-card">
@@ -127,9 +100,9 @@
             <a class="tag" href="/tags#Psychology">Psychology</a>
           
         </div>
-        <h3 class="post-title"><a href="/Why-to-(or-not-to)-study-psychology">Why to (or not to) study Psychology</a></h3> 
+        <h3 class="post-title"><a href="/Why-to-(or-not-to)-study-psychology.html">Why to (or not to) study Psychology</a></h3> 
         <p class="post-preview">As the admissions period in Türkiye draws to a close, I would like to share my own 2 cents on...</p>
-        <a href="/Why-to-(or-not-to)-study-psychology" class="post-link">Read More</a>
+        <a href="/Why-to-(or-not-to)-study-psychology.html" class="post-link">Read More</a>
       </div>
      
   </div>
@@ -139,8 +112,10 @@
     <p>Umur Yıldız</p>
     <div class="footer-icons">
       <a aria-label="Send email" href="mailto:umuryildiz_@outlook.com"><i class="icon fa fa-envelope"></i></a>
+      <a aria-label="My Google Scholar" target="_blank" href="https://scholar.google.com/citations?user=82q9bcMAAAAJ&hl=en"><i class="icon fa fa-graduation-cap" aria-hidden="true"></i></a>
       <a aria-label="My Twitter" target="_blank" href="https://x.com/Iudaincarnate"><i class="icon fa fa-twitter" aria-hidden="true"></i></a>
       <a aria-label="My Github" target="_blank" href="https://github.com/UYildiz12"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
+      <a aria-label="Download CV" target="_blank" href="/cv.pdf"><i class="icon fa fa-file-pdf-o" aria-hidden="true"></i></a>
     </div>
   </div>
 </footer>

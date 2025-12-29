@@ -1,5 +1,5 @@
 @-webkit-keyframes pulse {
-    from {
+    0%, to {
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
         filter: alpha(opacity=40);
         opacity: .4;
@@ -12,32 +12,20 @@
         opacity: 1;
         top: -10px;
     }
-    to {
+}
+
+@keyframes pulse {
+    0%, to {
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
         filter: alpha(opacity=40);
         opacity: .4;
         top: 0;
-    }
-}
-
-@keyframes pulse {
-    from {
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-        filter: alpha(opacity=40);
-        opacity: .4;
-        top: 0
     }
     50% {
         -ms-filter: none;
         -webkit-filter: none;
         filter: none;
         opacity: 1;
-        top: -10px
-    }
-    to {
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-        filter: alpha(opacity=40);
-        opacity: .4;
-        top: 0
+        top: -10px;
     }
 }

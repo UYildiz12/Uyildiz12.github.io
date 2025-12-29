@@ -1,6 +1,11 @@
 {
   "links": [
     {
+      "title": "Google Scholar",
+      "icon": "fa-graduation-cap",
+      "url": "https://scholar.google.com/citations?user=82q9bcMAAAAJ&hl=en"
+    },
+    {
       "title": "Twitter",
       "icon": "fa-twitter",
       "url": "https://x.com/Iudaincarnate"

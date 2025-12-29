@@ -2,20 +2,21 @@ var gulp = require('gulp');
 var csso = require('gulp-csso');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
-var sass = require('gulp-sass');
+var sass = require('gulp-dart-sass');
 var plumber = require('gulp-plumber');
 var cp = require('child_process');
 var imagemin = require('gulp-imagemin');
 var browserSync = require('browser-sync');
 
-var jekyllCommand = (/^win/.test(process.platform)) ? 'jekyll.bat' : 'jekyll';
+var jekyllCommand = 'bundle';
+var jekyllArgs = ['exec', 'jekyll', 'build'];
 
 /*
  * Build the Jekyll Site
  * runs a child process in node that runs the jekyll commands
  */
 gulp.task('jekyll-build', function (done) {
-	return cp.spawn(jekyllCommand, ['build'], {stdio: 'inherit'})
+	return cp.spawn('cmd', ['/c', 'bundle exec jekyll build'], {stdio: 'inherit'})
 		.on('close', done);
 });
 
@@ -45,7 +46,7 @@ gulp.task('browser-sync', gulp.series(['jekyll-build'], function(done) {
 gulp.task('sass', function() {
   return gulp.src('src/styles/**/*.scss')
     .pipe(plumber())
-    .pipe(sass())
+    .pipe(sass({includePaths: ['_sass']}))
     .pipe(csso())
 		.pipe(gulp.dest('assets/css/'))
 });
