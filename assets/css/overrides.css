@@ -1,0 +1,52 @@
+/* Overrides for GitHub Pages without rebuild */
+.header-links .link {
+  position: relative;
+  display: inline-block;
+}
+
+.header-links .link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.7;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.header-links .link:hover::after,
+.header-links .link:focus::after {
+  transform: scaleX(1);
+}
+
+.header-icons .icon {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.header-icons .icon:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.header-icons .icon:active {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14);
+}
+
+.footer-icons .icon {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.footer-icons .icon:hover {
+  transform: translateY(-2px) scale(1.05);
+  opacity: 0.8;
+}
+
+.footer-icons .icon:active {
+  transform: translateY(-1px) scale(1.02);
+  opacity: 0.9;
+}
