@@ -47,6 +47,15 @@
     color: #000 !important;
     font-size: 20px;
     margin: 0 5px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    &:hover {
+      transform: translateY(-2px) scale(1.05);
+      opacity: 0.8;
+    }
+    &:active {
+      transform: translateY(-1px) scale(1.02);
+      opacity: 0.9;
+    }
     &.fa-graduation-cap::before {
       transform: translateX(-3px);
       display: inline-block;
