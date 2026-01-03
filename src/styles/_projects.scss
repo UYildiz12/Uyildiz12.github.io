@@ -64,6 +64,8 @@
   @media only screen and (min-width: $cut) {
     float: left;
     width: 48%;
+    margin-top: -5%;
+    margin-right: -5%;
   }
   img {
     @media only screen and (min-width: $cut) {
