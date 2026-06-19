@@ -1,0 +1,51 @@
+---
+permalink: /experimental/
+layout: null
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Umur Yıldız — experimental</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/overrides.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <style>
+    #particles-js { position: relative; overflow: hidden; }
+    #neuro { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+    #particles-js .header,
+    #particles-js .down { z-index: 2; }
+  </style>
+</head>
+<body>
+  <div id="particles-js">
+    <canvas id="neuro"></canvas>
+    <div class="header">
+      <h1>
+        <span class="site-title">Umur Yıldız</span>
+        <span class="site-description">HRI &amp; Neuroscience Researcher</span>
+      </h1>
+      <div class="header-icons">
+        <a aria-label="Send email" href="mailto:umuryildiz_@outlook.com"><i class="icon fa fa-envelope"></i></a>
+        <a aria-label="My Google Scholar" target="_blank" href="https://scholar.google.com/citations?user=82q9bcMAAAAJ&hl=en"><i class="icon fa fa-graduation-cap" aria-hidden="true"></i></a>
+        <a aria-label="My Twitter" target="_blank" href="https://x.com/Iudaincarnate"><i class="icon fa fa-twitter" aria-hidden="true"></i></a>
+        <a aria-label="My Github" target="_blank" href="https://github.com/UYildiz12"><i class="icon fa fa-github-alt" aria-hidden="true"></i></a>
+        <a aria-label="Download CV" target="_blank" href="/cv.pdf"><i class="icon fa fa-file-pdf-o" aria-hidden="true"></i></a>
+      </div>
+      <div class="header-links">
+        <a class="link" href="/#about">About</a>
+        <a class="link" href="/#projects">Research</a>
+        <a class="link" href="{{ '/publications/' | relative_url }}">Publications</a>
+        <a class="link" href="/#posts">Posts</a>
+      </div>
+    </div>
+    <a class="down" href="/#about"><i class="icon fa fa-chevron-down" aria-hidden="true"></i></a>
+  </div>
+  <script src="{{ '/assets/js/neuro-inserter.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+</body>
+</html>

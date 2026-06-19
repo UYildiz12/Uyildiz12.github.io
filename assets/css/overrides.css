@@ -1,7 +1,49 @@
 /* Overrides for GitHub Pages without rebuild */
+
+/* Neuro-inserter canvas — fills the hero, sits behind the header content. */
+#particles-js {
+  position: relative;
+  overflow: hidden;
+}
+
+#neuro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+}
+
+#particles-js .header,
+#particles-js .down {
+  z-index: 2;
+}
+
 .header-links .link {
   position: relative;
   display: inline-block;
+}
+
+/* Pull the icon row + nav links up closer to the subtitle.
+   The gap = ~27px minus this value. -22px => ~5px gap.
+   Make it MORE negative to tighten further, less to loosen. */
+.header-icons {
+  margin-top: -26px;
+}
+
+.header-links {
+  margin-top: -8px;
+}
+
+/* The subtitle owns the divider line (its border-bottom).
+   padding-top  = gap from the title down to the subtitle text.
+   padding-bottom = gap from the subtitle text down to the line.
+   Theme defaults were 2.22rem / 3.33rem (huge); shrink to pull the line up. */
+.site-description {
+  padding-top: 1.4rem;
+  padding-bottom: 0.6rem;
 }
 
 .header-links .link::after {
@@ -49,4 +91,97 @@
 .footer-icons .icon:active {
   transform: translateY(-1px) scale(1.02);
   opacity: 0.9;
+}
+
+/* ==========================================================================
+   Publications page — black & white, editorial
+   ========================================================================== */
+.publications {
+  margin-top: 0.5rem;
+}
+
+.pub-section {
+  margin-bottom: 2.75rem;
+  scroll-margin-top: 90px;
+}
+
+.pub-section > h2 {
+  font-size: 1.5rem;
+  margin: 0 0 1.4rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 2px solid #1a1a1a;
+}
+
+.pub {
+  padding: 1.15rem 0 1.25rem;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.pub:last-child {
+  border-bottom: none;
+}
+
+.pub-title {
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 1.1rem;
+  line-height: 1.45;
+  margin: 0 0 0.4rem;
+}
+
+.pub-title a {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.pub-title a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.pub-authors {
+  margin: 0 0 0.2rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.pub-authors .me {
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+.pub-venue {
+  margin: 0 0 0.7rem;
+  font-family: "Noto Serif", Georgia, serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.pub-links {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pub-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #1a1a1a;
+  border-radius: 999px;
+  color: #1a1a1a;
+  background: #fff;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.pub-links a:hover {
+  background: #1a1a1a;
+  color: #fff;
+  transform: translateY(-1px);
 }

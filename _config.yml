@@ -34,6 +34,8 @@ navigation:
     url: /#projects
   - text: Posts
     url: /#posts
+  - text: Publications
+    url: /publications/
   - text: Tags
     url: /tags
 
