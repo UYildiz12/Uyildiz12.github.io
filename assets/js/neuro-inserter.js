@@ -27,7 +27,7 @@
     return { a1: a1, a2: a2 };
   }
   function fk(a, p) { var ex = a.bx + a.L1 * Math.cos(p.a1), ey = a.by + a.L1 * Math.sin(p.a1); return { ex: ex, ey: ey, wx: ex + a.L2 * Math.cos(p.a1 + p.a2), wy: ey + a.L2 * Math.sin(p.a1 + p.a2), wa: p.a1 + p.a2 }; }
-  function ikTip(a, t) { var p = ik(a, t); var wa = p.a1 + p.a2; return ik(a, { x: t.x - Math.cos(wa) * a.flen, y: t.y - Math.sin(wa) * a.flen }); }
+  function ikTip(a, t) { var p = ik(a, t), wa = p.a1 + p.a2; for (var i = 0; i < 5; i++) { p = ik(a, { x: t.x - Math.cos(wa) * a.flen, y: t.y - Math.sin(wa) * a.flen }); wa = p.a1 + p.a2; } return p; }
   function tip(a, k) { return { x: k.wx + Math.cos(k.wa) * a.flen, y: k.wy + Math.sin(k.wa) * a.flen }; }
   function state(a, ph) {
     var acc = 0;
