@@ -66,8 +66,9 @@
     canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     sc = cl(H / 720, 0.7, 1.3);
-    var L1 = 112 * sc, L2 = 90 * sc, jr = 14 * sc; ihw = 6 * sc; slotH = 9 * sc;
-    target = W < 760 ? 22 : 46;
+    var mob = W < 760, as = mob ? 0.85 : 1;
+    var L1 = 112 * sc * as, L2 = 90 * sc * as, jr = 14 * sc * as; ihw = 6 * sc; slotH = 9 * sc;
+    target = mob ? 20 : 46;
     LT = { x: W * 0.13, mouthY: H * 0.40, q: [] }; LT.dispY = LT.mouthY - 3 * sc;
     RT = { x: W * 0.87, mouthY: H * 0.40, q: [] }; RT.depY = RT.mouthY + 5 * sc;
     var cap = Math.max(6, Math.floor((LT.mouthY - H * 0.04) / slotH));
