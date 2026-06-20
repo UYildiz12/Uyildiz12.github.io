@@ -66,17 +66,18 @@
     canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     sc = cl(H / 720, 0.7, 1.3);
-    var mob = W < 760, as = mob ? 0.85 : 1;
+    var mob = W < 760, as = mob ? 0.69 : 1;
     var L1 = 112 * sc * as, L2 = 90 * sc * as, jr = 14 * sc * as; ihw = 6 * sc; slotH = 9 * sc;
-    target = mob ? 20 : 46;
+    var edge = mob ? Math.min(30, Math.max(0, (L1 + L2) - W * 0.22)) : 0;
+    target = mob ? 16 : 46;
     LT = { x: W * 0.13, mouthY: H * 0.40, q: [] }; LT.dispY = LT.mouthY - 3 * sc;
     RT = { x: W * 0.87, mouthY: H * 0.40, q: [] }; RT.depY = RT.mouthY + 5 * sc;
     var cap = Math.max(6, Math.floor((LT.mouthY - H * 0.04) / slotH));
     for (var i = 0; i < cap; i++) LT.q.push({ y: ltSlot(i), ty: ltSlot(i) });
     arms = [
-      mkArm({ bx: W * 0.21, by: H * 0.58, L1: L1, L2: L2, jr: jr, elbow: 1, kind: 'place', period: T, phase: 0,
+      mkArm({ bx: W * 0.21 - edge, by: H * 0.58, L1: L1, L2: L2, jr: jr, elbow: 1, kind: 'place', period: T, phase: 0,
         rest: { x: W * 0.25, y: H * 0.30 }, A: { x: LT.x, y: LT.dispY }, B: { x: W * 0.30, y: H * 0.56 } }),
-      mkArm({ bx: W * 0.79, by: H * 0.58, L1: L1, L2: L2, jr: jr, elbow: -1, kind: 'remove', period: T, phase: 0.5,
+      mkArm({ bx: W * 0.79 + edge, by: H * 0.58, L1: L1, L2: L2, jr: jr, elbow: -1, kind: 'remove', period: T, phase: 0.5,
         rest: { x: W * 0.75, y: H * 0.30 }, A: { x: W * 0.70, y: H * 0.56 }, B: { x: RT.x, y: RT.depY } })
     ];
   }
@@ -246,9 +247,15 @@
     }
   }
 
-  var started = false;
-  function loop(now) { stepField(); stepSignals(); draw(now); requestAnimationFrame(loop); }
-  function start() { resize(); if (H < 80) { setTimeout(start, 120); return; } if (started) return; started = true; seed(); if (reduce) draw(0); else requestAnimationFrame(loop); }
+  var started = false, visible = true, running = false, tOff = 0, lastNow = 0;
+  function loop(now) { lastNow = now; if (!visible) { running = false; return; } stepField(); stepSignals(); draw(now - tOff); requestAnimationFrame(loop); }
+  function resume() { if (!started || !visible || running || reduce) return; running = true; requestAnimationFrame(function (now) { tOff += now - lastNow; loop(now); }); }
+  function start() {
+    resize(); if (H < 80) { setTimeout(start, 120); return; } if (started) return; started = true; seed();
+    if (reduce) { draw(0); return; }
+    running = true; requestAnimationFrame(loop);
+    if (window.IntersectionObserver) { new IntersectionObserver(function (e) { visible = e[0].isIntersecting; if (visible) resume(); }, { threshold: 0 }).observe(canvas); }
+  }
   var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { resize(); if (!started) start(); }, 150); });
   canvas.addEventListener('click', function (e) {
     var r = canvas.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;

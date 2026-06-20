@@ -26,6 +26,15 @@
   #particles-js {
     min-height: 95vh;
   }
+  #particles-js .header {
+    transform: translate(-50%, calc(-50% - 50px));
+  }
+  /* Keep the writing legible over the network. */
+  #particles-js .site-title,
+  #particles-js .site-description,
+  #particles-js .header-links .link {
+    text-shadow: 0 0 12px #fff, 0 0 7px #fff, 0 0 4px #fff;
+  }
 }
 
 .header-links .link {
@@ -103,6 +112,14 @@
 /* ==========================================================================
    Publications page — black & white, editorial
    ========================================================================== */
+
+/* Inset the page container so content isn't flush to the edges on narrow screens. */
+.inner {
+  box-sizing: border-box;
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
 .publications {
   margin-top: 0.5rem;
 }
