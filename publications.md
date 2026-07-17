@@ -25,12 +25,12 @@ permalink: /publications/
   <h2>Computational Neuroscience</h2>
 
   <div class="pub">
-    <p class="pub-title"><a href="https://www.biorxiv.org/content/10.64898/2026.03.26.714100v1" target="_blank" rel="noopener">Naturalistic Stimulus Reconstruction from fMRI: A Primer in the Natural Scenes Dataset</a></p>
+    <p class="pub-title"><a href="https://apertureneuro.org/article/162412-naturalistic-stimulus-reconstruction-from-fmri-a-primer-in-the-natural-scenes-dataset" target="_blank" rel="noopener">Naturalistic Stimulus Reconstruction from fMRI: A Primer in the Natural Scenes Dataset</a></p>
     <p class="pub-authors"><span class="me">Umur Yıldız</span>, Burcu A. Ürgen</p>
-    <p class="pub-venue">bioRxiv preprint, 2026</p>
+    <p class="pub-venue">Aperture Neuro, 2026</p>
     <p class="pub-links">
-      <a href="https://www.biorxiv.org/content/10.64898/2026.03.26.714100v1" target="_blank" rel="noopener"><i class="fa fa-external-link" aria-hidden="true"></i> Paper</a>
-      <a href="https://www.biorxiv.org/content/10.64898/2026.03.26.714100v1.full.pdf" target="_blank" rel="noopener"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a>
+      <a href="https://apertureneuro.org/article/162412-naturalistic-stimulus-reconstruction-from-fmri-a-primer-in-the-natural-scenes-dataset" target="_blank" rel="noopener"><i class="fa fa-external-link" aria-hidden="true"></i> Paper</a>
+      <a href="https://apertureneuro.org/article/162412.pdf" target="_blank" rel="noopener"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a>
       <a href="https://github.com/UYildiz12/nsd-tutorial-notebooks" target="_blank" rel="noopener"><i class="fa fa-github" aria-hidden="true"></i> Code</a>
     </p>
   </div>
