@@ -7,7 +7,7 @@ layout: default
     <h1>Latest Posts</h1>
   </div>
   <div class="post-container">
-    {% for post in site.posts limit:2 %}
+    {% for post in site.posts %}{% if forloop.first or post.featured %}
       <div class="post-card">
         <div class="post-date">{{ post.date | date: "%B %d, %Y" }}</div>
         <div class="post-tags">
@@ -19,6 +19,6 @@ layout: default
         <p class="post-preview">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
         <a href="{{ post.url }}" class="post-link">Read More</a>
       </div>
-    {% endfor %} 
+    {% endif %}{% endfor %} 
   </div>
 </section>

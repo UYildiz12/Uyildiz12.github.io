@@ -2,7 +2,8 @@
 layout: post
 title: "Why to (or not to) study Psychology"
 description: "A disucssion on psychological education"
-date: 2024-08-24
+date: 2023-08-19
+featured: true
 feature_image: images/psych..jpeg 
 tags: [Psychology]
 ---
