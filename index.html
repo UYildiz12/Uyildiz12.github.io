@@ -7,7 +7,7 @@ layout: default
     <h1>Latest Posts</h1>
   </div>
   <div class="post-container">
-    {% for post in site.posts %} 
+    {% for post in site.posts limit:2 %}
       <div class="post-card">
         <div class="post-date">{{ post.date | date: "%B %d, %Y" }}</div>
         <div class="post-tags">
