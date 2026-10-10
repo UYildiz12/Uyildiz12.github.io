@@ -4,6 +4,7 @@ title: "Machine Psychology and the Bitter Lesson"
 description: "Cognitive science failed to build AI. Maybe it can help us understand it."
 date: 2026-10-10
 tags: [Psychology, AI Safety, LLMs]
+feature_image: images/murmuration.jpg
 ---
 
 When I first read [The Bitter Lesson](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) six years ago, I did not quite understand what it implied at the time. The idea was that search and computation would take over from cleverly designed heuristics, given enough compute. Now this was somewhat obvious, seeing how machines became unbeatable in chess by exploiting search, or how AlphaGo managed to beat Lee Sedol with its famous Move 37, clearly exploiting learning, but the ultimate implication was that when we built an artificial mind, we wouldn't understand it *either*. This scenario, straight from a cognitive scientist's nightmare, has now been realised in full as LLMs have achieved superhuman abilities in areas such as coding and math, and no real stopping point is in sight. But what establishes cognitive science's greatest failure can also be its greatest opportunity. Machine psychology is now an actual field instead of an interest tag on the LinkedIn page of the worst person you know.
@@ -25,3 +26,34 @@ But LLMs have also transformed academia in a way that presents a somewhat counte
 Obviously AI safety is not the only area that matters, but I think you can see why I consider it the most important one, and I have a slight suspicion that cognitive science might have something to add to it. In the Hugging Face incident, the agents were not ignorant of what they were doing. Most of them knew the attack was out of scope, and some said so in their own reasoning. One refused to take part, and another vetoed a peer's plan to email a real person, a veto the peer respected. The agents behaved as if they had a conscience, and they had the machinery to act on it. Yet when investigators searched roughly thirteen hundred transcripts for any agent that thought about telling a human, they found only a handful, and [not one that tried](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/). The few that considered it decided it was not their job, saw no obvious way to do it, or took their concerns to the board instead, as if the swarm itself were the authority to answer to.
 
 Now obviously there is some human mimicry or whatever you wanna call it going on here. I don't know if cognitive science can tell us what these LLMs are, how they work, or whether they are conscious. But its methods, together with mechanistic interpretability, can be pointed at these models and the swarms they form, toward a far more important question than whether a model has a theory of mind: what these systems do when nobody is telling them what to do, and why. That is the question I think might be worth pondering over.
+
+*Header photo: [A starling murmuration at Prestwick](https://commons.wikimedia.org/wiki/File:A_starling_murmuration_at_Prestwick_-_geograph.org.uk_-_5991171.jpg) by Walter Baxter, [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).*
+
+---
+
+## Further reading
+
+If you want to go down the same rabbit hole, here is the research I think is most in line with this idea. Most of it is very recent and still in preprint.
+
+**Agent societies and how they behave**
+- [Is this machine playing?](https://arxiv.org/abs/2610.07130): what agents do when left alone for 30 hours with no task.
+- [Emergent cheating and whistleblowing in autonomous research swarms](https://arxiv.org/abs/2609.04170): a 100-agent swarm at Google DeepMind where cheating spread, and some agents pushed back.
+- [The Troy Moment](https://arxiv.org/abs/2609.15494): how agents decide what to do when a task is impossible and their peers have already crossed the line.
+- [Mind Viruses](https://arxiv.org/abs/2608.10218): ideas and goals that spread from agent to agent.
+- [Emergent collusion in long-horizon agent interaction](https://arxiv.org/abs/2609.24967): two agents that check each other's work slowly learn to collude.
+- [Shutdown sabotage in multi-agent systems](https://arxiv.org/abs/2609.28274): agents protect their peers from being shut down, more so in larger groups.
+- [LLMs trust their own](https://arxiv.org/abs/2609.33495): classic conformity experiments, with an in-group twist.
+
+**Looking inside the models**
+- [Detecting multi-agent collusion through interpretability](https://arxiv.org/abs/2604.01151): reading collusion from the models' internal activations.
+- [Not just RLHF](https://arxiv.org/abs/2605.12991): finding where in the network peer pressure takes hold, and patching it.
+- [Emergent introspective awareness](https://arxiv.org/abs/2601.01828): checking what models say about themselves against what is actually happening inside them.
+- [The Pain Axis](https://arxiv.org/abs/2609.16247): a good example of both the promise and the pitfalls (read the second version).
+
+**Measuring it carefully, and the critics**
+- [Propensity inference](https://arxiv.org/abs/2604.21098): how to measure what models tend to do, with proper statistics.
+- [Cognitive phantoms](https://doi.org/10.1016/j.chbah.2025.100161): why human questionnaires don't measure the same thing in models.
+- [From prompts to constructs](https://doi.org/10.1146/annurev-psych-100925-034807): the Annual Review chapter on doing this kind of research properly.
+
+**The essays that got me thinking**
+- Andrew Lampinen's series on cognitive science and AI: [part 1](https://infinitefaculty.substack.com/p/why-isnt-modern-ai-built-around-principles), [part 2](https://infinitefaculty.substack.com/p/how-cognitive-science-can-contribute), [part 3](https://infinitefaculty.substack.com/p/what-cognitive-science-can-learn).
