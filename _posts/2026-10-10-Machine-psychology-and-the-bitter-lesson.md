@@ -5,6 +5,7 @@ description: "Cognitive science failed to build AI. Maybe it can help us underst
 date: 2026-10-10
 tags: [Psychology, AI Safety, LLMs]
 feature_image: images/murmuration.jpg
+feature_image_credit: "Photo: A starling murmuration at Prestwick, by Walter Baxter (CC BY-SA 2.0)"
 ---
 
 When I first read [The Bitter Lesson](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) six years ago, I did not quite understand what it implied at the time. The idea was that search and computation would take over from cleverly designed heuristics, given enough compute. Now this was somewhat obvious, seeing how machines became unbeatable in chess by exploiting search, or how AlphaGo managed to beat Lee Sedol with its famous Move 37, clearly exploiting learning, but the ultimate implication was that when we built an artificial mind, we wouldn't understand it *either*. This scenario, straight from a cognitive scientist's nightmare, has now been realised in full as LLMs have achieved superhuman abilities in areas such as coding and math, and no real stopping point is in sight. But what establishes cognitive science's greatest failure can also be its greatest opportunity. Machine psychology is now an actual field instead of an interest tag on the LinkedIn page of the worst person you know.
@@ -27,7 +28,6 @@ Obviously AI safety is not the only area that matters, but I think you can see w
 
 Now obviously there is some human mimicry or whatever you wanna call it going on here. I don't know if cognitive science can tell us what these LLMs are, how they work, or whether they are conscious. But its methods, together with mechanistic interpretability, can be pointed at these models and the swarms they form, toward a far more important question than whether a model has a theory of mind: what these systems do when nobody is telling them what to do, and why. That is the question I think might be worth pondering over.
 
-*Header photo: [A starling murmuration at Prestwick](https://commons.wikimedia.org/wiki/File:A_starling_murmuration_at_Prestwick_-_geograph.org.uk_-_5991171.jpg) by Walter Baxter, [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/).*
 
 ---
 

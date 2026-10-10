@@ -13,7 +13,7 @@ layout: default2
       </div><!-- .post-meta -->
       {% if page.feature_image and page.feature_image != "" %}
       <figure class="post-thumbnail image-card width-wide">
-        <img src="{{ page.feature_image | relative_url }}" alt="{{ page.title }}">
+        <img src="{{ page.feature_image | relative_url }}" alt="{{ page.title }}"{% if page.feature_image_credit %} title="{{ page.feature_image_credit | escape }}"{% endif %}>
       </figure><!-- .post-thumbnail -->
       {% endif %}
     </header><!-- .post-header2 -->
