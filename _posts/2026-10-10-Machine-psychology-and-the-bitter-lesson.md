@@ -35,13 +35,6 @@ Now obviously there is some human mimicry or whatever you wanna call it going on
 
 If you want to go down the same rabbit hole, here is a rough map. It goes from studying these models from the outside and from the inside, to what happens when they start working together. Most of the newer work is still in preprint.
 
-**Machine psychology: studying models like participants**
-- [Machine Psychology](https://arxiv.org/abs/2303.13988): the manifesto.
-- [Testing theory of mind in large language models and humans](https://doi.org/10.1038/s41562-024-01882-z): a battery of theory of mind tests, with models and human participants side by side.
-- [Kosinski's false-belief study](https://doi.org/10.1073/pnas.2405460121) and [Ullman's reply](https://arxiv.org/abs/2302.08399): models seem to pass the classic tests, until small changes to the stories trip them up. The best-known back and forth in the field.
-- [Playing repeated games with large language models](https://doi.org/10.1038/s41562-025-02172-y): models play the prisoner's dilemma and other games, and turn out to be good at looking after themselves but bad at coordinating.
-- [Role play with large language models](https://doi.org/10.1038/s41586-023-06647-8): a way of talking about what a model "wants" without claiming too much: the model plays characters.
-
 **Doing it properly: methods and critics**
 - [Cognitive phantoms](https://doi.org/10.1016/j.chbah.2025.100161): why human questionnaires don't measure the same thing in models.
 - [From prompts to constructs](https://doi.org/10.1146/annurev-psych-100925-034807): the Annual Review chapter on doing this kind of research properly.
