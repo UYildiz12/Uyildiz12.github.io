@@ -1,0 +1,27 @@
+<button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+</button>
+<script>
+  (function () {
+    var root = document.documentElement;
+    function set(t, save) {
+      root.setAttribute('data-theme', t);
+      if (save) { try { localStorage.setItem('theme', t); } catch (e) {} }
+      window.dispatchEvent(new CustomEvent('themechange', { detail: t }));
+    }
+    document.querySelector('.theme-toggle').addEventListener('click', function () {
+      set(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+    });
+    /* Follow the system setting until the visitor chooses one. */
+    if (window.matchMedia) {
+      var mq = window.matchMedia('(prefers-color-scheme: dark)');
+      var onChange = function (e) {
+        var saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (err) {}
+        if (!saved) set(e.matches ? 'dark' : 'light', false);
+      };
+      if (mq.addEventListener) mq.addEventListener('change', onChange); else if (mq.addListener) mq.addListener(onChange);
+    }
+  })();
+</script>

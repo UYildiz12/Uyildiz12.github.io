@@ -5,7 +5,13 @@
   var W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var INK = '#1c1c1c', BG = '#ffffff', NODE = '#262626';
+  var INK, BG, NODE, EDGE, GLOW, LINKC;
+  function applyTheme() {
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (dark) { INK = '#e6e9ec'; BG = '#121417'; NODE = '#dfe3e7'; EDGE = '230,233,236'; GLOW = '235,238,241'; LINKC = '205,210,215'; }
+    else { INK = '#1c1c1c'; BG = '#ffffff'; NODE = '#262626'; EDGE = '18,18,18'; GLOW = '22,22,22'; LINKC = '40,40,40'; }
+  }
+  applyTheme();
   var T = 5600, LINK = 162, NR = 2.8;
   var field = [], arms = [], fronts = [], litEdges = [], waveCool = 0, target, sc = 1, ihw = 6, slotH = 9;
   var LT = {}, RT = {};
@@ -114,8 +120,8 @@
     }
   }
   function drawGlow() {
-    for (var e = 0; e < litEdges.length; e++) { var le = litEdges[e]; ctx.strokeStyle = 'rgba(18,18,18,' + (0.45 * le.lit).toFixed(3) + ')'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(le.a.x, le.a.y); ctx.lineTo(le.b.x, le.b.y); ctx.stroke(); }
-    for (var i = 0; i < field.length; i++) { var p = field[i]; if (p.lit > 0.05) { ctx.fillStyle = 'rgba(22,22,22,' + (0.26 * p.lit).toFixed(3) + ')'; ctx.beginPath(); ctx.arc(p.x, p.y, NR + NR * 3.4 * p.lit, 0, 6.2832); ctx.fill(); } }
+    for (var e = 0; e < litEdges.length; e++) { var le = litEdges[e]; ctx.strokeStyle = 'rgba(' + EDGE + ',' + (0.45 * le.lit).toFixed(3) + ')'; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(le.a.x, le.a.y); ctx.lineTo(le.b.x, le.b.y); ctx.stroke(); }
+    for (var i = 0; i < field.length; i++) { var p = field[i]; if (p.lit > 0.05) { ctx.fillStyle = 'rgba(' + GLOW + ',' + (0.26 * p.lit).toFixed(3) + ')'; ctx.beginPath(); ctx.arc(p.x, p.y, NR + NR * 3.4 * p.lit, 0, 6.2832); ctx.fill(); } }
   }
 
   function stepField() {
@@ -229,7 +235,7 @@
       var a = field[i];
       for (var j = i + 1; j < field.length; j++) {
         var b = field[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx * dx + dy * dy);
-        if (d < LINK) { ctx.strokeStyle = 'rgba(40,40,40,' + (0.42 * (1 - d / LINK)).toFixed(3) + ')'; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+        if (d < LINK) { ctx.strokeStyle = 'rgba(' + LINKC + ',' + (0.42 * (1 - d / LINK)).toFixed(3) + ')'; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
       }
     }
     drawGlow();
@@ -261,5 +267,6 @@
     var r = canvas.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
     if (field.length < target * 1.8) field.push(neuron(x, y));
   });
+  window.addEventListener('themechange', function () { applyTheme(); if (started && !running) draw(lastNow - tOff); });
   start();
 })();

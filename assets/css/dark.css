@@ -1,0 +1,197 @@
+/* Dark mode. Active when <html data-theme="dark">, set by the theme script in <head>. */
+:root {
+  --dm-bg: #121417;
+  --dm-surface: #1b1f24;
+  --dm-surface-2: #23282e;
+  --dm-border: #2e343b;
+  --dm-text: #c9cfd6;
+  --dm-muted: #8d97a1;
+  --dm-heading: #eef1f4;
+  --dm-link: #7fb0ff;
+  --dm-link-hover: #a9c9ff;
+}
+
+html[data-theme="dark"] { color-scheme: dark; }
+
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  background: var(--dm-bg);
+  color: var(--dm-text);
+}
+
+/* Text */
+html[data-theme="dark"] p,
+html[data-theme="dark"] li,
+html[data-theme="dark"] em,
+html[data-theme="dark"] strong,
+html[data-theme="dark"] section,
+html[data-theme="dark"] .post-content,
+html[data-theme="dark"] .post-meta,
+html[data-theme="dark"] .post-author,
+html[data-theme="dark"] .author-bio,
+html[data-theme="dark"] .user-details,
+html[data-theme="dark"] .contents,
+html[data-theme="dark"] .contents-right,
+html[data-theme="dark"] blockquote {
+  color: var(--dm-text);
+}
+
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6,
+html[data-theme="dark"] .post-title,
+html[data-theme="dark"] .post-title a,
+html[data-theme="dark"] .author-title,
+html[data-theme="dark"] .site-title,
+html[data-theme="dark"] .site-title a,
+html[data-theme="dark"] .logo-text {
+  color: var(--dm-heading);
+}
+
+html[data-theme="dark"] .post-date,
+html[data-theme="dark"] time,
+html[data-theme="dark"] .post-share span,
+html[data-theme="dark"] .author-location,
+html[data-theme="dark"] .author-website,
+html[data-theme="dark"] .site-description,
+html[data-theme="dark"] .pub-venue {
+  color: var(--dm-muted);
+}
+
+/* Links */
+html[data-theme="dark"] a { color: var(--dm-link); }
+html[data-theme="dark"] a:hover { color: var(--dm-link-hover); }
+
+/* Rules and borders */
+html[data-theme="dark"] hr { background: var(--dm-border); border-color: var(--dm-border); }
+html[data-theme="dark"] .site-header,
+html[data-theme="dark"] article.post,
+html[data-theme="dark"] .author-box,
+html[data-theme="dark"] .pub,
+html[data-theme="dark"] .menu-toggle {
+  border-color: var(--dm-border);
+}
+html[data-theme="dark"] blockquote { border-color: var(--dm-border); }
+html[data-theme="dark"] code,
+html[data-theme="dark"] pre {
+  background: var(--dm-surface);
+  color: var(--dm-text);
+}
+
+/* Scriptor header and mobile menu */
+html[data-theme="dark"] .menu-toggle { color: var(--dm-muted); }
+html[data-theme="dark"] .icon-menu,
+html[data-theme="dark"] .icon-menu:before,
+html[data-theme="dark"] .icon-menu:after { background-color: var(--dm-muted); }
+html[data-theme="dark"] .site-navigation,
+html[data-theme="dark"] .site-navigation-wrap { background: var(--dm-bg); }
+html[data-theme="dark"] .menu-item a { color: var(--dm-text); }
+html[data-theme="dark"] .menu-item a:hover,
+html[data-theme="dark"] .menu-item .nav-current { color: var(--dm-heading); }
+
+/* Homepage hero with the neuron canvas */
+html[data-theme="dark"] #particles-js { background: var(--dm-bg) !important; }
+html[data-theme="dark"] .header,
+html[data-theme="dark"] .header h1,
+html[data-theme="dark"] .header .site-title,
+html[data-theme="dark"] .header .site-description,
+html[data-theme="dark"] .header-links a.link,
+html[data-theme="dark"] .header-icons a,
+html[data-theme="dark"] a.down,
+html[data-theme="dark"] .header i.icon {
+  color: var(--dm-heading);
+}
+html[data-theme="dark"] .header i.icon,
+html[data-theme="dark"] .header-icons .icon { border-color: var(--dm-heading); color: var(--dm-heading); }
+html[data-theme="dark"] .header-icons .icon:hover,
+html[data-theme="dark"] .header-icons .icon:active {
+  background: var(--dm-heading);
+  color: var(--dm-bg);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+}
+html[data-theme="dark"] .user-projects li { color: var(--dm-text); }
+
+/* Homepage post cards */
+html[data-theme="dark"] .post-card {
+  background: var(--dm-surface);
+  border-color: var(--dm-border);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+}
+html[data-theme="dark"] .post-card .post-date { color: var(--dm-muted); }
+html[data-theme="dark"] .post-card .post-title a,
+html[data-theme="dark"] .post-card h3.post-title { color: var(--dm-heading); }
+html[data-theme="dark"] .post-preview { color: var(--dm-text); }
+html[data-theme="dark"] a.post-link { color: var(--dm-heading); }
+html[data-theme="dark"] a.tag {
+  background: var(--dm-heading);
+  color: var(--dm-bg);
+  border-color: transparent;
+}
+
+/* Footer */
+html[data-theme="dark"] footer.footer,
+html[data-theme="dark"] .footer {
+  background: var(--dm-bg);
+  color: var(--dm-text);
+}
+html[data-theme="dark"] .footer i.icon,
+html[data-theme="dark"] .footer a,
+html[data-theme="dark"] .footer-content { color: var(--dm-text); }
+html[data-theme="dark"] .footer-icons .icon { color: var(--dm-text) !important; }
+html[data-theme="dark"] .footer a:hover { color: var(--dm-heading); }
+html[data-theme="dark"] .post-card:hover { border-color: #4a525b; box-shadow: 0 10px 22px rgba(0, 0, 0, 0.55); }
+
+/* Publications page */
+html[data-theme="dark"] .pub-title a,
+html[data-theme="dark"] .pub-authors .me { color: var(--dm-heading); }
+html[data-theme="dark"] .pub-title a:hover { color: #fff; }
+html[data-theme="dark"] .pub-authors { color: var(--dm-text); }
+html[data-theme="dark"] .pub-links a {
+  background: transparent;
+  color: var(--dm-heading);
+  border-color: var(--dm-heading);
+}
+html[data-theme="dark"] .pub-links a:hover {
+  background: var(--dm-heading);
+  color: var(--dm-bg);
+}
+
+/* Images: dim slightly so bright photos don't glare */
+html[data-theme="dark"] .post-content img,
+html[data-theme="dark"] .post-thumbnail img { filter: brightness(0.92); }
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1000;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  color: #1a1a1a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  padding: 0;
+}
+.theme-toggle:hover { transform: translateY(-1px); }
+.theme-toggle:focus-visible { outline: 2px solid #2d72d9; outline-offset: 2px; }
+.theme-toggle svg { width: 20px; height: 20px; }
+.theme-toggle .icon-sun { display: none; }
+html[data-theme="dark"] .theme-toggle {
+  background: var(--dm-surface-2);
+  color: var(--dm-heading);
+  border-color: var(--dm-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+html[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+html[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
