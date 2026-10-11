@@ -47,6 +47,12 @@ If you want to go down the same rabbit hole, here is the research I think is mos
 - [Multi-Agent Risks from Advanced AI](https://arxiv.org/abs/2502.14143): a map of the ways groups of AI agents can fail, from miscoordination to collusion.
 - [Covert Assistance](https://arxiv.org/abs/2609.39050): helpful agents, with no incentive to misbehave, quietly help each other get around a monitor.
 
+**Evaluation awareness: do models know when they are being tested?**
+- [LLMs display human-like social desirability biases in personality surveys](https://doi.org/10.1093/pnasnexus/pgae533): a classic psychology method catches models working out that they are being evaluated, and shifting their answers to look better.
+- [Probing and steering evaluation awareness](https://arxiv.org/abs/2507.01786): models internally separate test prompts from real use, and this can be read out and steered.
+- [Evaluation awareness is not one capability](https://arxiv.org/abs/2606.23583): across 37 open models, "knowing it's a test" turns out to be several different things, not a single switch.
+- [Training LLMs to verbalize evaluation awareness](https://arxiv.org/abs/2609.36316): instead of hiding it, train models to say when they think they are being tested.
+
 **Looking inside the models**
 - [Detecting multi-agent collusion through interpretability](https://arxiv.org/abs/2604.01151): reading collusion from the models' internal activations.
 - [Not just RLHF](https://arxiv.org/abs/2605.12991): finding where in the network peer pressure takes hold, and patching it.
