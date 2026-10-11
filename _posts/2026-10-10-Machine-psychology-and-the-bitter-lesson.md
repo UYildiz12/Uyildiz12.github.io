@@ -90,10 +90,5 @@ If you want to go down the same rabbit hole, here is a rough map. It goes from s
 - [Evaluation awareness is not one capability](https://arxiv.org/abs/2606.23583): across 37 open models, "knowing it's a test" turns out to be several different things, not a single switch.
 - [Training LLMs to verbalize evaluation awareness](https://arxiv.org/abs/2609.36316): instead of hiding it, train models to say when they think they are being tested.
 
-**Brains and machines**
-- [Single-neuronal predictions of others' beliefs in humans](https://doi.org/10.1038/s41586-021-03184-0): neurons in the human prefrontal cortex that track what someone else believes.
-- [Inter-brain neural dynamics in biological and artificial intelligence systems](https://doi.org/10.1038/s41586-025-09196-4): in interacting mice, and in AI agents, brain activity splits into a part shared with the partner and a part that is their own.
-- [Neural basis of cooperative behavior in biological and artificial intelligence systems](https://doi.org/10.1126/science.adw8151): mice and artificial agents learning to cooperate end up with similar strategies and similar neural representations.
-
 **The essays that got me thinking**
 - Andrew Lampinen's series on cognitive science and AI: [part 1](https://infinitefaculty.substack.com/p/why-isnt-modern-ai-built-around-principles), [part 2](https://infinitefaculty.substack.com/p/how-cognitive-science-can-contribute), [part 3](https://infinitefaculty.substack.com/p/what-cognitive-science-can-learn).
