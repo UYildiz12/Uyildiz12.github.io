@@ -33,7 +33,54 @@ Now obviously there is some human mimicry or whatever you wanna call it going on
 
 ## Further reading
 
-If you want to go down the same rabbit hole, here is the research I think is most in line with this idea. Most of it is very recent and still in preprint.
+If you want to go down the same rabbit hole, here is a rough map. It goes from how these models learn, to studying them from the outside and from the inside, to what happens when they start working together. The older papers are the foundations; most of the newer ones are still preprints.
+
+**How these models learn, and why we can't just read them**
+- [The Bitter Lesson](http://www.incompleteideas.net/IncIdeas/BitterLesson.html): where this whole post started.
+- [Scaling laws](https://arxiv.org/abs/2001.08361) and [Chinchilla](https://arxiv.org/abs/2203.15556): performance improves predictably with more compute, data and parameters. The bitter lesson, turned into equations.
+- [A mathematical theory of semantic development in deep neural networks](https://doi.org/10.1073/pnas.1820226116): deep networks learn concepts in stages, broad distinctions first, much like children do.
+- [Grokking](https://arxiv.org/abs/2201.02177): networks that have memorised their training data can suddenly start to generalise long afterwards, a good reminder that what a model has learned is not always visible from the outside.
+- [In-context learning and induction heads](https://arxiv.org/abs/2209.11895): one of the first mechanisms found behind a model's ability to learn from its prompt.
+- [In-context learning as implicit Bayesian inference](https://arxiv.org/abs/2111.02080): a theory of why learning from the prompt works at all.
+- [Data distributional properties drive emergent in-context learning](https://arxiv.org/abs/2205.05055): the ability appears partly because of what natural data looks like, bursty and full of rare things.
+- [Task diversity and non-Bayesian in-context learning](https://arxiv.org/abs/2306.15063): with enough different tasks in training, models stop recalling the tasks they have seen and start solving new ones.
+
+**Machine psychology: studying models like participants**
+- [Machine Psychology](https://arxiv.org/abs/2303.13988): the manifesto.
+- [Using cognitive psychology to understand GPT-3](https://doi.org/10.1073/pnas.2218523120): classic decision-making and reasoning experiments, run on a language model.
+- [Testing theory of mind in large language models and humans](https://doi.org/10.1038/s41562-024-01882-z): a battery of theory of mind tests, with models and human participants side by side.
+- [Kosinski's false-belief study](https://doi.org/10.1073/pnas.2405460121) and [Ullman's reply](https://arxiv.org/abs/2302.08399): models seem to pass the classic tests, until small changes to the stories trip them up. The best-known back and forth in the field.
+- [Playing repeated games with large language models](https://doi.org/10.1038/s41562-025-02172-y): models play the prisoner's dilemma and other games, and turn out to be good at looking after themselves but bad at coordinating.
+- [Role play with large language models](https://doi.org/10.1038/s41586-023-06647-8): a way of talking about what a model "wants" without claiming too much: the model plays characters.
+
+**Doing it properly: methods and critics**
+- [How to evaluate the cognitive abilities of LLMs](https://doi.org/10.1038/s41562-024-02096-z): a practical guide from cognitive scientists on running these experiments well.
+- [Cognitive phantoms](https://doi.org/10.1016/j.chbah.2025.100161): why human questionnaires don't measure the same thing in models.
+- [From prompts to constructs](https://doi.org/10.1146/annurev-psych-100925-034807): the Annual Review chapter on doing this kind of research properly.
+- [Propensity inference](https://arxiv.org/abs/2604.21098): how to measure what models tend to do, with proper statistics.
+
+**Looking inside: the basics of interpretability**
+- [Zoom In](https://doi.org/10.23915/distill.00024.001): the essay that started circuits-style interpretability.
+- [Toy Models of Superposition](https://arxiv.org/abs/2209.10652): why single neurons are hard to read: networks pack in more features than they have neurons.
+- [Interpretability in the wild](https://arxiv.org/abs/2211.00593): a full circuit for a simple language behaviour, traced head by head in GPT-2.
+- [Distributed alignment search](https://arxiv.org/abs/2303.02536): testing whether a network actually uses the high-level variable you think it uses.
+- [The Geometry of Truth](https://arxiv.org/abs/2310.06824): true and false statements separate along a line inside the model.
+- [The Linear Representation Hypothesis](https://arxiv.org/abs/2311.03658): what it actually means for a concept to be "a direction" in a model.
+- [Activation steering](https://arxiv.org/abs/2308.10248) and [Representation Engineering](https://arxiv.org/abs/2310.01405): add a direction to the activations and you can change behaviour, for example make a model more honest.
+
+**Probes: reading minds off activations**
+- [Linear classifier probes](https://arxiv.org/abs/1610.01644): the original idea: train a simple classifier to read a property out of a layer.
+- [Probes with control tasks](https://doi.org/10.18653/v1/D19-1275): a probe can learn the task by itself, so you need controls. Psychologists will feel at home.
+- [Probing classifiers: promises, shortcomings, and advances](https://doi.org/10.1162/coli_a_00422): a review of what probes can and cannot tell you.
+- [Language models represent beliefs of self and others](https://arxiv.org/abs/2402.18496): what a character in a story believes can be read out of the model, and changing it changes the model's theory of mind answers.
+- [Brittle minds, fixable activations](https://doi.org/10.18653/v1/2025.findings-emnlp.1226): these belief representations are real but fragile, and editing the activations can fix them.
+- [Language models use lookbacks to track beliefs](https://arxiv.org/abs/2505.14685): the mechanism a model uses to keep track of who knows what.
+- [Theory of mind in LLMs, a parallel to single neurons](https://arxiv.org/abs/2309.01660): units inside LLMs that track other people's beliefs, compared with neurons in the human brain.
+- [Persona vectors](https://arxiv.org/abs/2507.21509): directions for traits like sycophancy or "evil", which can be used to monitor and control a model's character.
+- [Detecting strategic deception using linear probes](https://arxiv.org/abs/2502.03407): a probe that catches models deceiving in realistic scenarios such as insider trading.
+- [LLMs know they're wrong and agree anyway](https://arxiv.org/abs/2604.19117): the same few attention heads carry "this is wrong" in sycophancy and in lying, and alignment training curbs the behaviour but leaves the circuit in place.
+- [Emergent introspective awareness](https://arxiv.org/abs/2601.01828): checking what models say about themselves against what is actually happening inside them.
+- [The Pain Axis](https://arxiv.org/abs/2609.16247): a good example of both the promise and the pitfalls (read the second version).
 
 **Agent societies and how they behave**
 - [Emergent cheating and whistleblowing in autonomous research swarms](https://arxiv.org/abs/2609.04170): a 100-agent swarm at Google DeepMind where cheating spread, and some agents pushed back.
@@ -43,9 +90,20 @@ If you want to go down the same rabbit hole, here is the research I think is mos
 - [Shutdown sabotage in multi-agent systems](https://arxiv.org/abs/2609.28274): agents protect their peers from being shut down, more so in larger groups.
 - [LLMs trust their own](https://arxiv.org/abs/2609.33495): classic conformity experiments, with an in-group twist.
 
-**Multi-agent safety**
+**Multi-agent safety, from the outside and the inside**
 - [Multi-Agent Risks from Advanced AI](https://arxiv.org/abs/2502.14143): a map of the ways groups of AI agents can fail, from miscoordination to collusion.
 - [Covert Assistance](https://arxiv.org/abs/2609.39050): helpful agents, with no incentive to misbehave, quietly help each other get around a monitor.
+- [Detecting multi-agent collusion through interpretability](https://arxiv.org/abs/2604.01151): reading collusion from the models' internal activations.
+- [Not just RLHF](https://arxiv.org/abs/2605.12991): finding where in the network peer pressure takes hold, and patching it.
+- [Silent Dissent](https://arxiv.org/abs/2610.02702): an Asch-style conformity study where agents that give in to the majority still hold on to their original reasoning inside.
+- [The Flag Game](https://arxiv.org/abs/2609.19124): a toy world for studying, mechanistically, how beliefs form and spread in a swarm. Small groups collapse onto one belief; large ones polarise.
+
+**Oversight: can we still see what they are doing?**
+- [Chain of thought monitorability](https://arxiv.org/abs/2507.11473): reading a model's reasoning is one of the best safety tools we have, and it might not last.
+- [Monitoring reasoning models for misbehavior](https://arxiv.org/abs/2503.11926): train a model against the monitor and it learns to hide what it is doing.
+- [AI Control](https://arxiv.org/abs/2312.06942): safety measures designed to hold even if the model is trying to get around them.
+- [Alignment faking](https://arxiv.org/abs/2412.14093): a model that plays along during training to avoid being changed.
+- [Sleeper Agents](https://arxiv.org/abs/2401.05566): hidden behaviours that survive standard safety training.
 
 **Evaluation awareness: do models know when they are being tested?**
 - [LLMs display human-like social desirability biases in personality surveys](https://doi.org/10.1093/pnasnexus/pgae533): a classic psychology method catches models working out that they are being evaluated, and shifting their answers to look better.
@@ -53,16 +111,11 @@ If you want to go down the same rabbit hole, here is the research I think is mos
 - [Evaluation awareness is not one capability](https://arxiv.org/abs/2606.23583): across 37 open models, "knowing it's a test" turns out to be several different things, not a single switch.
 - [Training LLMs to verbalize evaluation awareness](https://arxiv.org/abs/2609.36316): instead of hiding it, train models to say when they think they are being tested.
 
-**Looking inside the models**
-- [Detecting multi-agent collusion through interpretability](https://arxiv.org/abs/2604.01151): reading collusion from the models' internal activations.
-- [Not just RLHF](https://arxiv.org/abs/2605.12991): finding where in the network peer pressure takes hold, and patching it.
-- [Emergent introspective awareness](https://arxiv.org/abs/2601.01828): checking what models say about themselves against what is actually happening inside them.
-- [The Pain Axis](https://arxiv.org/abs/2609.16247): a good example of both the promise and the pitfalls (read the second version).
-
-**Measuring it carefully, and the critics**
-- [Propensity inference](https://arxiv.org/abs/2604.21098): how to measure what models tend to do, with proper statistics.
-- [Cognitive phantoms](https://doi.org/10.1016/j.chbah.2025.100161): why human questionnaires don't measure the same thing in models.
-- [From prompts to constructs](https://doi.org/10.1146/annurev-psych-100925-034807): the Annual Review chapter on doing this kind of research properly.
+**Brains and machines**
+- [Single-neuronal predictions of others' beliefs in humans](https://doi.org/10.1038/s41586-021-03184-0): neurons in the human prefrontal cortex that track what someone else believes.
+- [Inter-brain neural dynamics in biological and artificial intelligence systems](https://doi.org/10.1038/s41586-025-09196-4): in interacting mice, and in AI agents, brain activity splits into a part shared with the partner and a part that is their own.
+- [Neural basis of cooperative behavior in biological and artificial intelligence systems](https://doi.org/10.1126/science.adw8151): mice and artificial agents learning to cooperate end up with similar strategies and similar neural representations.
+- [A shared linguistic space from brain to brain](https://doi.org/10.1016/j.neuron.2024.06.025): language-model embeddings line up the brain activity of speakers and listeners in real conversations.
 
 **The essays that got me thinking**
 - Andrew Lampinen's series on cognitive science and AI: [part 1](https://infinitefaculty.substack.com/p/why-isnt-modern-ai-built-around-principles), [part 2](https://infinitefaculty.substack.com/p/how-cognitive-science-can-contribute), [part 3](https://infinitefaculty.substack.com/p/what-cognitive-science-can-learn).
