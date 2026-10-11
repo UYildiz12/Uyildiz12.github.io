@@ -113,6 +113,9 @@ html[data-theme="dark"] .header-icons .icon:active {
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
 }
 html[data-theme="dark"] .user-projects li { color: var(--dm-text); }
+/* Research illustrations are black-on-white line art: invert them to light lines on a
+   background that lands on the page colour (white -> ~#121212). */
+html[data-theme="dark"] .user-projects img { filter: invert(0.93) hue-rotate(180deg); }
 
 /* Homepage post cards */
 html[data-theme="dark"] .post-card {
