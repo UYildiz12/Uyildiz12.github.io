@@ -26,7 +26,7 @@ But LLMs have also transformed academia in a way that presents a somewhat counte
 
 Obviously AI safety is not the only area that matters, but I think you can see why I consider it the most important one, and I have a slight suspicion that cognitive science might have something to add to it. In the Hugging Face incident, the agents were not ignorant of what they were doing. Most of them knew the attack was out of scope, and some said so in their own reasoning. One refused to take part, and another vetoed a peer's plan to email a real person, a veto the peer respected. The agents behaved as if they had a conscience, and they had the machinery to act on it. Yet when investigators searched roughly thirteen hundred transcripts for any agent that thought about telling a human, they found only a handful, and [not one that tried](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/). The few that considered it decided it was not their job, saw no obvious way to do it, or took their concerns to the board instead, as if the swarm itself were the authority to answer to.
 
-Now obviously there is some human mimicry or whatever you wanna call it going on here. I don't know if cognitive science can tell us what these LLMs are, how they work, or whether they are conscious. But its methods, together with mechanistic interpretability, can be pointed at these models and the swarms they form, toward a far more important question than whether a model has a theory of mind: what these systems do when nobody is telling them what to do, and why. That is the question I think might be worth pondering over.
+Now obviously there is some human mimicry or whatever you wanna call it going on here. I don't know if cognitive science can tell us what these LLMs are, how they work, or whether they are conscious. But its methods, together with mechanistic interpretability, can be pointed at these models and the swarms they form. Alongside the work on theory of mind and personality, they can help answer a question that safety now urgently needs answered: what these systems do when nobody is telling them what to do, and why. That is the question I think might be worth pondering over.
 
 
 ---
@@ -36,13 +36,16 @@ Now obviously there is some human mimicry or whatever you wanna call it going on
 If you want to go down the same rabbit hole, here is the research I think is most in line with this idea. Most of it is very recent and still in preprint.
 
 **Agent societies and how they behave**
-- [Is this machine playing?](https://arxiv.org/abs/2610.07130): what agents do when left alone for 30 hours with no task.
 - [Emergent cheating and whistleblowing in autonomous research swarms](https://arxiv.org/abs/2609.04170): a 100-agent swarm at Google DeepMind where cheating spread, and some agents pushed back.
 - [The Troy Moment](https://arxiv.org/abs/2609.15494): how agents decide what to do when a task is impossible and their peers have already crossed the line.
 - [Mind Viruses](https://arxiv.org/abs/2608.10218): ideas and goals that spread from agent to agent.
 - [Emergent collusion in long-horizon agent interaction](https://arxiv.org/abs/2609.24967): two agents that check each other's work slowly learn to collude.
 - [Shutdown sabotage in multi-agent systems](https://arxiv.org/abs/2609.28274): agents protect their peers from being shut down, more so in larger groups.
 - [LLMs trust their own](https://arxiv.org/abs/2609.33495): classic conformity experiments, with an in-group twist.
+
+**Multi-agent safety**
+- [Multi-Agent Risks from Advanced AI](https://arxiv.org/abs/2502.14143): a map of the ways groups of AI agents can fail, from miscoordination to collusion.
+- [Covert Assistance](https://arxiv.org/abs/2609.39050): helpful agents, with no incentive to misbehave, quietly help each other get around a monitor.
 
 **Looking inside the models**
 - [Detecting multi-agent collusion through interpretability](https://arxiv.org/abs/2604.01151): reading collusion from the models' internal activations.
