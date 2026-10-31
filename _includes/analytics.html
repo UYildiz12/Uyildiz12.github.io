@@ -1,16 +1,22 @@
-{% if site.cloudflare_analytics and site.cloudflare_analytics != "" %}
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cloudflare_analytics }}"}'></script>
-{% endif %}
-{% if site.visits_url and site.visits_url != "" %}
 <script>
-/* Counts visits with our own Worker, which ad blockers leave alone. Opening any page with #nocount stops counting
-   this browser, and #count starts it again. */
+/* Opening any page with #nocount stops both counters for this browser, and #count starts them again. */
 (function () {
+  var counted = true;
   try {
     if (location.hash === '#nocount') localStorage.setItem('nocount', '1');
     if (location.hash === '#count') localStorage.removeItem('nocount');
-    if (localStorage.getItem('nocount')) return;
+    counted = !localStorage.getItem('nocount');
   } catch (e) {}
+  if (!counted) return;
+{% if site.cloudflare_analytics and site.cloudflare_analytics != "" %}
+  var beacon = document.createElement('script');
+  beacon.defer = true;
+  beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  beacon.setAttribute('data-cf-beacon', '{"token": "{{ site.cloudflare_analytics }}"}');
+  document.head.appendChild(beacon);
+{% endif %}
+{% if site.visits_url and site.visits_url != "" %}
+  /* Our own Worker, which ad blockers leave alone. */
   var url = '{{ site.visits_url }}';
   var id = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
   var shown = 0, since = document.visibilityState === 'visible' ? Date.now() : 0;
@@ -26,6 +32,6 @@
     if (document.visibilityState === 'visible') since = Date.now();
     else if (since) { shown += Date.now() - since; since = 0; send('/seen', { id: id, seconds: seconds() }); }
   });
+{% endif %}
 })();
 </script>
-{% endif %}
