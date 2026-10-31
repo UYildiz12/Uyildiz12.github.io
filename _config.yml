@@ -36,6 +36,8 @@ navigation:
     url: /#posts
   - text: Publications
     url: /publications/
+  - text: Course
+    url: /course/
   - text: Tags
     url: /tags
 
