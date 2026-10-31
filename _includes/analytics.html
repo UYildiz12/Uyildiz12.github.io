@@ -20,7 +20,7 @@
     } catch (e) {}
   }
   function seconds() { return (shown + (since ? Date.now() - since : 0)) / 1000; }
-  send('/view', { id: id, path: location.pathname, ref: document.referrer, width: screen.width });
+  send('/view', { id: id, path: location.pathname, ref: document.referrer, touch: navigator.maxTouchPoints || 0 });
   setInterval(function () { if (since) send('/seen', { id: id, seconds: seconds() }); }, 30000);
   document.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'visible') since = Date.now();
