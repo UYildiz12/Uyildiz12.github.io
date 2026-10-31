@@ -1156,7 +1156,7 @@ scores
 
 <!-- lab:guess_number -->
 
-Let's end with a little game. I'm thinking of a whole number from 1 to 100, and after each guess I'll only tell you whether it's too high, too low or right. Now you could just go 1, 2, 3 and so on, but that might take you a hundred guesses. So is there a way of guessing that always gets it in 7 guesses or fewer, no matter what the number is? Write code that plays the guesser against `secret`, printing each guess with whether it was too high, too low or right, and then how many guesses it took. And no peeking, you can only compare your guesses with `secret`, not just read it. Every Run picks a new secret, so give it a few tries.
+Let's end with a little game. I'm thinking of a whole number from 1 to 100, and after each guess I'll only tell you whether it's too high, too low or right. Now you could just go 1, 2, 3 and so on, but that might take you a hundred guesses. So is there a way of guessing that always gets it in 7 guesses or fewer, no matter what the number is? Write code that plays the guesser against `secret`, printing each guess with whether it was too high, too low or right, and then how many guesses it took. And no peeking, you can only compare your guesses with `secret`, not just read it. Every Run picks a new secret, so think about what could work and give it a few tries.
 
 <pre class="py" data-lab="true">
 import random
