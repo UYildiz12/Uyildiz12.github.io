@@ -26,6 +26,9 @@ favicon: images/favicon.png
 # Google Analytics id, e.g. "UA-NNNNNNNN-N"
 google_analytics: ""
 
+# Cloudflare Web Analytics token, from the site's JS snippet
+cloudflare_analytics: "f500a8ce228f4a69ac18465e5a7e5c67"
+
 # Site navigation - each item must have a title and a url.
 navigation:
   - text: Home
@@ -36,8 +39,6 @@ navigation:
     url: /#posts
   - text: Publications
     url: /publications/
-  - text: Course
-    url: /course/
   - text: Tags
     url: /tags
 
