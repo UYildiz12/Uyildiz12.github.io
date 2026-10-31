@@ -1,3 +1,31 @@
 {% if site.cloudflare_analytics and site.cloudflare_analytics != "" %}
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cloudflare_analytics }}"}'></script>
 {% endif %}
+{% if site.visits_url and site.visits_url != "" %}
+<script>
+/* Counts visits with our own Worker, which ad blockers leave alone. Opening any page with #nocount stops counting
+   this browser, and #count starts it again. */
+(function () {
+  try {
+    if (location.hash === '#nocount') localStorage.setItem('nocount', '1');
+    if (location.hash === '#count') localStorage.removeItem('nocount');
+    if (localStorage.getItem('nocount')) return;
+  } catch (e) {}
+  var url = '{{ site.visits_url }}';
+  var id = Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  var shown = 0, since = document.visibilityState === 'visible' ? Date.now() : 0;
+  function send(path, body) {
+    try {
+      fetch(url + path, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(body) });
+    } catch (e) {}
+  }
+  function seconds() { return (shown + (since ? Date.now() - since : 0)) / 1000; }
+  send('/view', { id: id, path: location.pathname, ref: document.referrer, width: screen.width });
+  setInterval(function () { if (since) send('/seen', { id: id, seconds: seconds() }); }, 30000);
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') since = Date.now();
+    else if (since) { shown += Date.now() - since; since = 0; send('/seen', { id: id, seconds: seconds() }); }
+  });
+})();
+</script>
+{% endif %}

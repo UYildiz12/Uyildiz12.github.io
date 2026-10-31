@@ -29,6 +29,9 @@ google_analytics: ""
 # Cloudflare Web Analytics token, from the site's JS snippet
 cloudflare_analytics: "f500a8ce228f4a69ac18465e5a7e5c67"
 
+# Our own visit counter (Coursefolder/UDL/visits), which ad blockers don't block
+visits_url: "https://course-visits.uyildiz12.workers.dev"
+
 # Site navigation - each item must have a title and a url.
 navigation:
   - text: Home
