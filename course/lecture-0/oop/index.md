@@ -913,7 +913,7 @@ Hold on to that pattern, a class that holds a pile of things and hands them out 
 
 <nav class="lesson-nav">
   <a class="prev" href="/course/lecture-0/data/">&larr; Working with Data</a>
-  <a class="next" href="/course/">Course &rarr;</a>
+  <a class="next" href="/course/lecture-1/concepts/">States, Actions and Rewards &rarr;</a>
 </nav>
 
 <script src="/course/assets/course.js"></script>

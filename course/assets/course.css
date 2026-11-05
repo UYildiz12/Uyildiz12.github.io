@@ -591,3 +591,36 @@ html[data-theme="dark"] .py-bar .py-play.is-playing { background-image: url("dat
   .viz-ghost { display: none; }
   .viz-mark { transition: none; }
 }
+
+/* Grid world figures (gridworld.js) */
+.grid-world { margin: 1.75em 0; text-align: center; }
+.grid-world svg { display: block; width: 100%; margin: 0 auto; }
+.grid-world text { fill: var(--c-ink); font-family: Montserrat, sans-serif; }
+.grid-world .gw-small { fill: var(--c-muted); }
+.grid-world .gw-cell { fill: var(--c-card); stroke: var(--c-line); stroke-width: 2; transition: stroke 0.2s; }
+.grid-world .gw-forbidden { fill: rgba(232, 135, 58, 0.3); }
+.grid-world .gw-target { fill: rgba(45, 114, 217, 0.3); }
+.grid-world .gw-visited { stroke: var(--c-accent); }
+.grid-world .gw-arrow line { stroke: var(--c-ink); stroke-width: 2.5; stroke-linecap: round; }
+.grid-world .gw-arrow circle { fill: none; stroke: var(--c-ink); stroke-width: 2.5; }
+.grid-world .gw-head { fill: var(--c-ink); }
+.grid-world .gw-agent { fill: var(--c-warm); transition: cx 0.35s ease, cy 0.35s ease; }
+.grid-world .gw-hit { fill: transparent; cursor: pointer; }
+.gw-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6em 1.6em; margin-top: 0.9em; font: 600 0.85em Montserrat, sans-serif; color: var(--c-ink); }
+.gw-controls label { display: flex; align-items: center; gap: 0.5em; }
+.gw-controls select { font: inherit; color: var(--c-ink); background: var(--c-card); border: 1px solid var(--c-line); border-radius: 6px; padding: 0.2em 0.4em; }
+.gw-controls input[type="range"] { width: 8em; accent-color: var(--c-accent); }
+.gw-controls output { min-width: 2.4em; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.gw-rewards { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-top: 0.8em; }
+.gw-rewards span { min-width: 2.2em; padding: 0.25em 0.3em; border: 1px solid var(--c-line); border-radius: 5px; background: var(--c-card); color: var(--c-muted); font: 0.8em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.gw-rewards .pos { color: var(--c-accent); font-weight: 700; }
+.gw-rewards .neg { color: var(--c-warm); font-weight: 700; }
+.gw-return { margin-top: 0.6em; font: 700 1.05em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--c-ink); }
+
+/* Typeset math (math.js) */
+.math-block { overflow-x: auto; overflow-y: hidden; }
+
+/* Optional asides that open on request */
+details.aside { margin: 1.25em 0; padding: 0.6em 1em; border-left: 3px solid var(--c-line); background: var(--c-card); border-radius: 0 6px 6px 0; }
+details.aside summary { cursor: pointer; font-weight: 600; color: var(--c-ink); }
+details.aside[open] summary { margin-bottom: 0.6em; }
