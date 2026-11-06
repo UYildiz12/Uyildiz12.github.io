@@ -624,3 +624,31 @@ html[data-theme="dark"] .py-bar .py-play.is-playing { background-image: url("dat
 details.aside { margin: 1.25em 0; padding: 0.6em 1em; border-left: 3px solid var(--c-line); background: var(--c-card); border-radius: 0 6px 6px 0; }
 details.aside summary { cursor: pointer; font-weight: 600; color: var(--c-ink); }
 details.aside[open] summary { margin-bottom: 0.6em; }
+
+/* Snake (snake.js) */
+.snake { margin: 1.75em 0; display: flex; flex-direction: column; align-items: center; }
+.snake canvas { display: block; border-radius: 8px; border: 1px solid var(--c-line); touch-action: none; outline: none; }
+.snake canvas:focus-visible { box-shadow: 0 0 0 3px var(--c-accent); }
+.snake-policies { display: flex; gap: 0; margin-bottom: 0.8em; border: 1px solid var(--c-line); border-radius: 7px; overflow: hidden; }
+.snake-policies button { border: 0; border-right: 1px solid var(--c-line); background: transparent; color: var(--c-ink); font: 600 0.8em/1 Montserrat, sans-serif; padding: 0.55em 1em; cursor: pointer; }
+.snake-policies button:last-child { border-right: 0; }
+.snake-policies button.is-on { background: var(--c-accent); color: #fff; }
+.snake .gw-rewards { min-height: 1.8em; }
+.snake-stats { display: flex; gap: 1.8em; margin-top: 0.7em; }
+.snake-stats span { display: flex; flex-direction: column; align-items: center; }
+.snake-stats small { color: var(--c-muted); font: 600 0.72em Montserrat, sans-serif; }
+.snake-stats b { font: 700 1.05em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--c-ink); }
+.snake-chart { display: block; margin-top: 0.8em; }
+.snake-chart[hidden], .snake-tools[hidden], .snake-tools button[hidden] { display: none; }
+.snake-tools { display: flex; gap: 0.4em; margin-top: 0.6em; }
+.snake-tools button { border: 1px solid var(--c-line); border-radius: 6px; background: transparent; color: var(--c-ink); font: 600 0.75em/1 Montserrat, sans-serif; padding: 0.45em 0.8em; cursor: pointer; }
+.snake-tools button.is-on { border-color: var(--c-accent); color: var(--c-accent); }
+.snake-tools .snake-forget { margin-left: 0.8em; }
+.grid-world .gw-value { fill: var(--c-muted); font: 700 12.5px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.grid-world .gw-value.pos { fill: var(--c-accent); }
+.grid-world .gw-value.neg { fill: var(--c-warm); }
+.grid-world .gw-flash { animation: gw-flash 0.6s ease-out; }
+@keyframes gw-flash { from { font-size: 16px; } to { font-size: 12.5px; } }
+.gw-controls button { border: 1px solid var(--c-line); border-radius: 6px; background: transparent; color: var(--c-ink); font: 600 0.95em/1 Montserrat, sans-serif; padding: 0.45em 0.9em; cursor: pointer; }
+.gw-controls button:first-child { border-color: var(--c-accent); color: var(--c-accent); }
+@media (prefers-reduced-motion: reduce) { .grid-world .gw-flash { animation: none; } }

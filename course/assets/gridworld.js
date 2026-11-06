@@ -2,7 +2,11 @@
    labels  names every cell
    policy  draws the arrows in data-policy, one action per cell from s1 to s9
    play    the same arrows, but clicking a cell turns its arrow, with a start cell, a gamma slider, the first
-           rewards faded by gamma^t and the discounted return */
+           rewards faded by gamma^t and the discounted return
+   values  the arrows with each cell's state value under them. Clicking a cell turns its arrow, and a gamma slider
+           sets the discount. The values are worked out by repeating the Bellman update until they settle
+   sweep   the arrows with values that start at 0, and a Step button that applies one Bellman update to every
+           cell at once */
 (function () {
   var CELL = 64, PAD = 4, SIZE = 3 * CELL + 2 * PAD;
   var FORBIDDEN = [6, 7], TARGET = 9;
@@ -44,9 +48,10 @@
     return t;
   }
 
-  function arrow(s, a, parent) {
+  function arrow(s, a, parent, lift) {
     var g = make('g', { 'class': 'gw-arrow' }, parent);
     var c = center(s);
+    c[1] -= lift || 0;
     if (a === 'stay') {
       make('circle', { cx: c[0], cy: c[1], r: 7 }, g);
       return g;
@@ -87,13 +92,15 @@
       return;
     }
 
+    var valued = mode === 'values' || mode === 'sweep';
     var arrows = make('g', {}, svg);
     function drawArrows() {
       arrows.replaceChildren();
-      for (var s = 1; s <= 9; s++) arrow(s, policy[s - 1], arrows);
+      for (var s = 1; s <= 9; s++) arrow(s, policy[s - 1], arrows, valued ? 9 : 0);
       svg.setAttribute('aria-label', 'The grid with a policy: ' + policy.map(function (a, i) { return 's' + (i + 1) + ' ' + a; }).join(', '));
     }
     drawArrows();
+    if (valued) return buildValues(fig, svg, policy, cells, mode, drawArrows);
     if (mode !== 'play') return;
 
     fig.classList.add('is-play');
@@ -189,6 +196,106 @@
         place();
       }, 550);
     }
+  }
+
+  function signed(v) { return v.toFixed(2).replace('-', '−'); }
+
+  // One Bellman update for every cell: the reward of the policy's move plus gamma times the value where it lands.
+  function bellman(policy, v, g) {
+    var out = {};
+    for (var s = 1; s <= 9; s++) {
+      var o = step(s, policy[s - 1]);
+      out[s] = o[1] + g * v[o[0]];
+    }
+    return out;
+  }
+
+  function zeros() { var v = {}; for (var s = 1; s <= 9; s++) v[s] = 0; return v; }
+
+  function buildValues(fig, svg, policy, cells, mode, drawArrows) {
+    var texts = {};
+    for (var s = 1; s <= 9; s++) {
+      var c = center(s);
+      texts[s] = make('text', { x: c[0], y: c[1] + 24, 'text-anchor': 'middle', 'class': 'gw-value' }, svg);
+    }
+    var controls = document.createElement('div');
+    controls.className = 'gw-controls';
+    fig.appendChild(controls);
+    var v = zeros(), k = 0, g = 0.9;
+
+    function show(changed) {
+      for (var s = 1; s <= 9; s++) {
+        texts[s].textContent = signed(v[s]);
+        texts[s].setAttribute('class', 'gw-value' + (v[s] > 0.05 ? ' pos' : v[s] < -0.05 ? ' neg' : ''));
+        if (changed && changed[s]) {
+          texts[s].classList.add('gw-flash');
+        }
+      }
+      svg.setAttribute('aria-label', 'State values: ' + Object.keys(v).map(function (s) { return 's' + s + ' ' + signed(v[s]); }).join(', '));
+    }
+
+    if (mode === 'values') {
+      var gammaLabel = document.createElement('label');
+      gammaLabel.textContent = 'γ ';
+      var gamma = document.createElement('input');
+      gamma.type = 'range';
+      gamma.min = '0';
+      gamma.max = '0.95';
+      gamma.step = '0.05';
+      gamma.value = '0.9';
+      var out = document.createElement('output');
+      gammaLabel.appendChild(gamma);
+      gammaLabel.appendChild(out);
+      controls.appendChild(gammaLabel);
+      var solve = function () {
+        g = parseFloat(gamma.value);
+        out.textContent = g.toFixed(2);
+        v = zeros();
+        for (var i = 0; i < 2000; i++) v = bellman(policy, v, g);
+        show();
+      };
+      gamma.addEventListener('input', solve);
+      fig.classList.add('is-play');
+      for (var h = 1; h <= 9; h++) {
+        var hk = corner(h);
+        var hit = make('rect', { 'class': 'gw-hit', x: hk[0], y: hk[1], width: CELL, height: CELL }, svg);
+        hit.addEventListener('click', (function (s) {
+          return function () {
+            policy[s - 1] = ORDER[(ORDER.indexOf(policy[s - 1]) + 1) % ORDER.length];
+            drawArrows();
+            solve();
+          };
+        })(h));
+      }
+      solve();
+      return;
+    }
+
+    // sweep
+    var stepButton = document.createElement('button');
+    stepButton.type = 'button';
+    stepButton.textContent = 'Step';
+    var resetButton = document.createElement('button');
+    resetButton.type = 'button';
+    resetButton.textContent = 'Reset';
+    var count = document.createElement('output');
+    controls.appendChild(stepButton);
+    controls.appendChild(resetButton);
+    controls.appendChild(count);
+    function label() { count.textContent = 'k = ' + k; }
+    stepButton.addEventListener('click', function () {
+      var next = bellman(policy, v, g), changed = {};
+      for (var s = 1; s <= 9; s++) changed[s] = Math.abs(next[s] - v[s]) > 1e-9;
+      v = next;
+      k += 1;
+      for (var t = 1; t <= 9; t++) texts[t].classList.remove('gw-flash');
+      void svg.getBoundingClientRect();
+      show(changed);
+      label();
+    });
+    resetButton.addEventListener('click', function () { v = zeros(); k = 0; show(); label(); });
+    show();
+    label();
   }
 
   document.querySelectorAll('.grid-world').forEach(build);

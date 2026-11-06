@@ -60,10 +60,41 @@ def next_state(s, a):
     return s_next
 </pre>
 
+Before running anything, trace these three calls by hand. For each one, write down the row and column `try_move` starts from, the row and column after the move, whether that's still on the grid, and what `next_state` returns in the end.
+
+<pre class="py-trace">
+next_state(8, "left")
+next_state(6, "right")
+next_state(2, "down")
+</pre>
+<pre class="py-solution">
+next_state(8, "left")
+row = 7 // 3 = 2, col = 7 % 3 = 1
+left is (0, -1), so the move goes to row 2, col 0, which is on the grid
+try_move gives 2 * 3 + 0 + 1 = 7, so next_state returns 7
+
+next_state(6, "right")
+row = 5 // 3 = 1, col = 5 % 3 = 2
+right is (0, 1), so the move goes to row 1, col 3, which is off the grid
+try_move gives None, so next_state keeps the agent where it was and returns 6
+
+next_state(2, "down")
+row = 1 // 3 = 0, col = 1 % 3 = 1
+down is (1, 0), so the move goes to row 1, col 1, which is on the grid
+try_move gives 1 * 3 + 1 + 1 = 5, so next_state returns 5
+</pre>
+<pre class="py-rubric">
+- Gives the final result of each call, which is 7, 6 and 5.
+- For each call, shows the starting row and column, the row and column after the move, and whether that is on the grid. How the arithmetic is laid out doesn't matter.
+- For the move off the grid, says that try_move gives None, so next_state keeps the agent where it was.
+</pre>
+
+Now run them and compare with your trace.
+
 <pre class="py">
-print(next_state(1, "right"))
-print(next_state(1, "up"))
-print(next_state(5, "right"))
+print(next_state(8, "left"))
+print(next_state(6, "right"))
+print(next_state(2, "down"))
 </pre>
 
 In our grid, an action always leads to the same place. The real world is messier. A gust of wind might push the agent somewhere else now and then. So instead of saying where an action leads, we say how likely each landing spot is. That's a probability, a number from 0 to 1 that says how often something happens if you try many times. 1 means always, 0 means never, and 0.1 means about one time in ten.
@@ -204,7 +235,7 @@ The return of a trajectory is the sum of all the rewards along the way. This one
 sum([r for s, a, r in trajectory])
 </pre>
 
-Now here's a second policy. It's the same as the first, except that it goes down from <span class="m">s\_1</span> and from <span class="m">s\_4</span>, which walks it straight through the forbidden <span class="m">s\_7</span>.
+Now here's a second policy. `dict(policy)` makes a copy, so we can change the copy and leave the first policy alone. It's the same as the first, except that it goes down from <span class="m">s\_1</span> and from <span class="m">s\_4</span>, which walks it straight through the forbidden <span class="m">s\_7</span>.
 
 <figure class="grid-world" data-mode="policy" data-policy="down down left down down down right right stay"></figure>
 
@@ -239,7 +270,7 @@ weight = 1
 for s, a, r in rollout(policy, 1, 1000):
     total += weight * r
     weight *= gamma
-total
+round(total, 2)
 </pre>
 
 It settles at 7.29. That total is called the discounted return, and the number we multiply by is the discount rate, written <span class="m">\gamma</span> (gamma). It can be anything from 0 up to, but not including, 1. Calling the rewards <span class="m">r\_1, r\_2, r\_3</span> and so on, in the order they come, the discounted return is
@@ -270,7 +301,7 @@ def discounted_return(rewards, gamma):
         total += gamma ** t * r
     return total
 
-discounted_return([0, 0, 0, 1], 0.9)
+round(discounted_return([0, 0, 0, 1], 0.9), 3)
 </pre>
 
 <span class="m">\gamma</span> also sets how far ahead the agent cares. Near 0, only the next few rewards count and the agent is short sighted. Near 1, rewards far in the future count almost as much as the next one.
@@ -307,228 +338,29 @@ Some tasks have a natural end, like a game of chess. One run from start to finis
 
 Our grid could go either way. We could say a run ends when the agent reaches the target. Instead, we let the target be a normal cell the agent could leave, and simply keep paying +1 for staying. With discounting, that makes everything a continuing task, so one set of math covers both.
 
-## When things are random
+Snake, on the other hand, is a classic episodic task, and here you're the policy. Every step pays a reward, `+1` for eating, `-1` for crashing and `0` otherwise, and a crash ends the episode. Click the board and play a few rounds with the arrow keys, or swipe on a phone. Then hand the game to the other policies. Random picks any direction that isn't straight back. Greedy heads for the food, unless that move would crash right away.
 
-With a deterministic policy and no wind, the same start always gives the same return. Now use `coin_policy`. It flips a coin in <span class="m">s\_1</span> between our two earlier policies, and the two paths give different returns.
+<figure class="snake"></figure>
 
-<pre class="py">
-def rollout_random(policy, s, steps):
-    rewards = []
-    for t in range(steps):
-        a = pick_action(policy, s)
-        rewards.append(reward(s, a))
-        s = next_state(s, a)
-    return rewards
+The state here is the whole board, where every piece of the snake is and where the food is. That's far more states than anyone could draw an arrow in, so for games like this we'll later need something smarter than a table.
 
-random.seed(0)
-for i in range(5):
-    print(round(discounted_return(rollout_random(coin_policy, 1, 200), 0.9), 2))
-</pre>
+Greedy beats random by a mile, but it still traps itself sooner or later, because it only looks one step ahead.
 
-So what's the return of this policy? Neither number on its own. What we can say is what it gets on average if we run it many, many times. That long run average is called the expected value. A die is the classic example. Each face comes up a sixth of the time, so take each face, multiply it by a sixth, and add them up.
+Learner is different. Nobody gives it a rule. It starts out knowing nothing, mostly tries random moves, and keeps track of which moves paid off in which situations. Speed it up and watch the chart. Each dot is one episode's return, and the line is the average of the last 20. As it learns, it explores less and less. How it does that is a few parts away, but everything it uses, states, actions, rewards and returns, is on this page.
 
-<span class="m d">1 \cdot \tfrac16 + 2 \cdot \tfrac16 + 3 \cdot \tfrac16 + 4 \cdot \tfrac16 + 5 \cdot \tfrac16 + 6 \cdot \tfrac16 = 3.5</span>
-
-So the expected value is each value times how often it happens, all added up. Rolling it a lot gets you close.
-
-<pre class="py">
-random.seed(0)
-rolls = [random.randint(1, 6) for i in range(100000)]
-sum(rolls) / len(rolls)
-</pre>
-
-The expected value of something is written <span class="m">\mathbb{E}[\,\cdot\,]</span>, so for a die roll <span class="m">X</span> it's <span class="m">\mathbb{E}[X] = 3.5</span>. With the sum sign, the rule above becomes
-
-<span class="m d">\mathbb{E}[X] = \sum\_x x \, p(x)</span>
-
-which reads "for every value <span class="m">x</span>, multiply it by its probability, and add them all up".
-
-The coin policy works the same way. Half the time it goes right and gets <span class="m">7.29</span>. The other half it goes down, pays <span class="m">-1</span> on its second step, and gets <span class="m">-0.9 + 7.29 = 6.39</span>. So its expected return is
-
-<span class="m d">\mathbb{E}[G] = 0.5 \cdot 7.29 + 0.5 \cdot 6.39 = 6.84</span>
-
-<pre class="py">
-random.seed(0)
-returns = [discounted_return(rollout_random(coin_policy, 1, 200), 0.9) for i in range(5000)]
-sum(returns) / len(returns)
-</pre>
-
-The randomness comes from two places, the policy rolling dice and the world rolling dice. The chance of one whole trajectory is the chance of each step multiplied together. Starting in <span class="m">s\_1</span>, the coin policy goes down with chance 0.5, and every move after that is certain, so the path through the forbidden cell has a chance of <span class="m">0.5 \times 1 \times 1 \times \dots = 0.5</span>. With wind, every step would bring its own chance into the product, like <span class="m">0.5 \times 0.9 \times 0.9 \times \dots</span>.
-
-<details class="aside" markdown="1">
-<summary>The same thing in general</summary>
-
-Here the small numbers count steps, so <span class="m">s\_t</span> is the state at step <span class="m">t</span>, not cell <span class="m">t</span>. <span class="m">\prod</span> (capital pi) is the multiplying version of <span class="m">\Sigma</span>.
-
-<span class="m d">p(\text{trajectory}) = p(s\_1) \prod\_{t} \pi(a\_t \mid s\_t) \, p(s\_{t+1} \mid s\_t, a\_t)</span>
-
-That's the chance of the starting state, times, for every step, the chance the policy picks that action, times the chance the world then lands where it did.
-
-</details>
-
-So now we can write down the goal of reinforcement learning. Find the policy whose expected discounted return is as big as possible.
-
-<span class="m d">\max\_{\pi} \; \mathbb{E}[G]</span>
-
-Read it as "out of all policies <span class="m">\pi</span>, find the one with the largest expected return".
-
-<!-- lab:windy_grid -->
-
-Add wind to the grid. Whenever the agent moves, there's a 20% chance a gust pushes it one extra cell down, if there's room below the cell it moved into. The reward stays the reward of the move the agent chose. Then estimate the expected discounted return of `policy` from <span class="m">s\_1</span>, with `gamma=0.9`, with and without wind, and print both.
-
-<pre class="py" data-lab="true">
-# your code here
-</pre>
-<pre class="py-solution">
-def windy_next_state(s, a):
-    s = next_state(s, a)
-    if random.random() &lt; 0.2 and s &lt;= 6:
-        s += 3
-    return s
-
-def rollout_windy(policy, s, steps, wind):
-    rewards = []
-    for t in range(steps):
-        a = policy[s]
-        rewards.append(reward(s, a))
-        s = windy_next_state(s, a) if wind else next_state(s, a)
-    return rewards
-
-random.seed(0)
-calm = [discounted_return(rollout_windy(policy, 1, 200, False), 0.9) for i in range(3000)]
-windy = [discounted_return(rollout_windy(policy, 1, 200, True), 0.9) for i in range(3000)]
-print(round(sum(calm) / len(calm), 2))
-print(round(sum(windy) / len(windy), 2))
-</pre>
-<pre class="py-rubric">
-- Adds a 20% chance that, after the chosen move, the agent is pushed one more cell down, and only when there is a cell below.
-- Keeps the reward as the reward of the chosen move.
-- Follows the deterministic policy from s1 with gamma 0.9, averaging the discounted return over many runs, at least a few hundred, with and without wind.
-- Prints both averages. Without wind it is 7.29. With wind it comes out higher, around 7.6, because the gusts push the agent down, the way it was heading anyway. Exact values vary with the random draws.
-</pre>
-
-<!-- /lab:windy_grid -->
-
-## Markov decision processes
-
-Everything in this part fits one frame, called a Markov decision process, or MDP for short.
-
-| piece | in our grid |
-|---|---|
-| states | the nine cells |
-| actions | up, right, down, left, stay |
-| transitions <span class="m">p(s^{\prime} \mid s, a)</span> | the moves, plus wind if there is any |
-| rewards <span class="m">p(r \mid s, a)</span> | the -1, 0 and +1 |
-| discount rate <span class="m">\gamma</span> | 0.9 |
-
-Hand an MDP a policy <span class="m">\pi</span> and it runs on its own. The Markov part is one assumption. What happens next depends only on the current state and action, not on how the agent got there.
-
-<span class="m d">p(s\_{\text{next}} \mid s\_{\text{now}}, a\_{\text{now}}, \text{everything before}) = p(s\_{\text{next}} \mid s\_{\text{now}}, a\_{\text{now}})</span>
-
-Knowing the whole history doesn't change the chances, once you know where the agent is now and what it does.
-
-That's why the word state matters so much. A state has to carry everything that matters for what comes next. Sometimes the agent can't see all of that. In poker you don't see the other players' cards, so what you see isn't the full state. It's called an observation, and the problem becomes a partially observed MDP. A common fix is to let the policy remember the last few observations.
-
-Now wrap the grid up as a class. `reset()` puts the agent back on its start cell and returns it. `step(a)` moves the agent, remembers where it is now, and returns the new state and the reward. Most RL code talks to its world through almost exactly these two methods, so you'll see this shape a lot.
-
-<pre class="py" data-skip="true">
-class GridWorld:
-    def __init__(self, start=1):
-        self.start = start
-        self.state = start
-    def reset(self):
-        ...  # your code here
-    def step(self, a):
-        ...  # your code here
-env = GridWorld()
-print(env.reset())
-print(env.step("right"))
-print(env.step("down"))
-</pre>
-<pre class="py-check">
-env = GridWorld(start=4)
-assert env.reset() == 4, "reset() should return the start cell."
-assert env.step("down") == (7, -1), f"From s4, down should give (7, -1), the forbidden cell and its penalty."
-assert env.state == 7, "step should remember the new state in self.state."
-assert env.step("left") == (7, -1), "From s7, left leaves the grid, so the agent stays and gets -1."
-env.step("right")
-assert env.reset() == 4 and env.state == 4, "reset() should put the agent back on its start cell."
-</pre>
-<pre class="py-solution">
-class GridWorld:
-    def __init__(self, start=1):
-        self.start = start
-        self.state = start
-    def reset(self):
-        self.state = self.start
-        return self.state
-    def step(self, a):
-        r = reward(self.state, a)
-        self.state = next_state(self.state, a)
-        return self.state, r
-env = GridWorld()
-print(env.reset())
-print(env.step("right"))
-print(env.step("down"))
-</pre>
-
-## Beyond the grid
-
-The same pieces describe much bigger problems.
-
-| | towel robot | chatbot |
-|---|---|---|
-| state | camera images and joint angles | the conversation so far |
-| action | where to move its joints next | its next message |
-| reward | 1 once the towel is on the hook, else 0 | +1 for an upvote, -10 for a downvote, else 0 |
-| episode | about 10 seconds | one conversation |
-
-<!-- lab:design_a_problem -->
-
-Pick one of these and describe it as an RL problem, a self-driving car, a poker player, an agent that books flights on a website, or anything else you like. Fill in a dictionary with the state, the actions, the reward and how an episode ends, and print it.
-
-<pre class="py" data-lab="true">
-problem = {
-    "name": "",
-    "state": "",
-    "actions": "",
-    "reward": "",
-    "episode ends": "",
-}
-# your code here
-</pre>
-<pre class="py-solution">
-problem = {
-    "name": "poker player",
-    "state": "my two cards, the cards on the table, the pot, every player's chips and the bets so far this hand",
-    "actions": "fold, call, or raise by some amount",
-    "reward": "the chips won or lost, given when the hand ends, and 0 on every other step",
-    "episode ends": "when the hand is over",
-}
-for key, value in problem.items():
-    print(f"{key}: {value}")
-</pre>
-<pre class="py-rubric">
-- Fills in all five entries for a real decision problem and prints them.
-- The state holds what the agent needs to decide, and says if it's only a partial view of the world, like hidden cards.
-- The actions are choices the agent itself makes.
-- The reward is a number that says how well the agent is doing and fits the goal of the problem, not a description of the right move.
-- Says when an episode ends, or that the task keeps going.
-</pre>
-
-<!-- /lab:design_a_problem -->
-
-Next we'll ask how good a policy is from each state on its own, which leads to the state value and the Bellman equation.
+Also notice that even for one policy, the return changes from episode to episode, so it's the average that tells policies apart. That's where we're going next.
 
 <p class="credit">This part follows Lecture 1 of Shiyu Zhao's <a href="https://github.com/MathFoundationRL/Book-Mathematical-Foundation-of-Reinforcement-Learning">Mathematical Foundations of Reinforcement Learning</a>, whose grid world it borrows, with examples from Lecture 1 of <a href="https://cs224r.stanford.edu/">Stanford CS224R</a> (Spring 2025).</p>
 
+
 <nav class="lesson-nav">
   <a class="prev" href="/course/lecture-0/oop/">&larr; Objects and Classes</a>
-  <a class="next" href="/course/">Course &rarr;</a>
+  <a class="next" href="/course/lecture-1/mdp/">Expected Return and MDPs &rarr;</a>
 </nav>
 
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script src="/course/assets/math.js"></script>
 <script src="/course/assets/gridworld.js"></script>
+<script src="/course/assets/snake.js"></script>
 <script src="/course/assets/course.js"></script>
 <script src="/course/assets/python-cells.js" data-traces="/course/assets/traces/concepts.json"></script>

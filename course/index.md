@@ -12,4 +12,7 @@ permalink: /course/
   <li><a href="/course/lecture-0/data/"><span class="lesson-num">0.2</span>Working with Data</a></li>
   <li><a href="/course/lecture-0/oop/"><span class="lesson-num">0.3</span>Objects and Classes</a></li>
   <li><a href="/course/lecture-1/concepts/"><span class="lesson-num">1.1</span>States, Actions and Rewards</a></li>
+  <li><a href="/course/lecture-1/mdp/"><span class="lesson-num">1.2</span>Expected Return and MDPs</a></li>
+  <li><a href="/course/lecture-1/bellman/"><span class="lesson-num">1.3</span>Values and the Bellman Equation</a></li>
+  <li><a href="/course/lecture-1/imitation/"><span class="lesson-num">1.4</span>Imitation Learning</a></li>
 </ol>

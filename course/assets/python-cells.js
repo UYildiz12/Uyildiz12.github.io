@@ -606,6 +606,109 @@ def _run_traced(src, names):
     state.cell.classList.remove('py-busy');
   }
 
+  // A trace exercise, <pre class="py-trace">, lists calls to work out by hand for the code cell above it, one per
+  // line. The reader writes a trace under each call. Check runs the calls for the true results and sends them with
+  // the trace to the grader, which decides whether the trace reaches them by the right steps. It's followed by
+  // <pre class="py-solution"> (a model trace) and <pre class="py-rubric"> (what a good trace shows), and its task is
+  // the paragraph right above it.
+  function buildTrace(pre) {
+    var calls = code(pre).split('\n').filter(function (l) { return l.trim(); });
+    var solution = null;
+    var rubric = null;
+    var next = pre.nextElementSibling;
+    while (next && next.matches('pre.py-solution, pre.py-rubric')) {
+      var after = next.nextElementSibling;
+      if (next.matches('.py-rubric')) rubric = code(next);
+      else solution = code(next);
+      next.remove();
+      next = after;
+    }
+    var above = pre.previousElementSibling;
+    var task = above && above.tagName === 'P' ? above.textContent.trim() : '';
+    var target = cells[cells.length - 1];
+    var template = calls.join('\n\n\n') + '\n\n';
+
+    var cell = document.createElement('div');
+    cell.className = 'py-cell py-exercise py-trace';
+    var area = document.createElement('textarea');
+    area.className = 'py-code';
+    area.value = template;
+    area.spellcheck = false;
+    area.setAttribute('aria-label', 'Your trace');
+    var bar = document.createElement('div');
+    bar.className = 'py-bar';
+    var grade = button('py-grade', null, 'Check');
+    bar.appendChild(grade);
+    if (solution) {
+      var reveal = button('py-solve', 'Show solution');
+      reveal.addEventListener('click', function () { area.value = solution; fit(area); });
+      bar.appendChild(reveal);
+    }
+    var reset = button('py-reset', 'Reset');
+    bar.appendChild(reset);
+    var out = document.createElement('div');
+    out.className = 'py-out';
+    out.hidden = true;
+    cell.appendChild(area);
+    cell.appendChild(bar);
+    cell.appendChild(out);
+    pre.replaceWith(cell);
+
+    var state = { cell: cell, area: area, out: out, ran: true, text: '', skip: true, trace: true };
+    cells.push(state);
+    var check = function () { gradeTrace(state, target, calls, task, solution || '', rubric || ''); };
+    grade.addEventListener('click', check);
+    reset.addEventListener('click', function () { area.value = template; fit(area); });
+    area.addEventListener('input', function () { fit(area); });
+    area.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && (e.shiftKey || e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        check();
+      }
+    });
+    fit(area);
+  }
+
+  // Make sure the traced code has run, work out the true results of the calls, and ask the grader about the trace.
+  async function gradeTrace(state, target, calls, task, solution, rubric) {
+    if (state.cell.classList.contains('py-busy')) return;
+    state.out.replaceChildren();
+    if (!target.ran && (await runUpTo(target)) === null) {
+      show(state, 'The code above needs to run first, and it stopped with an error.', 'py-error');
+      return;
+    }
+    var py = await python();
+    show(state, 'Checking…', 'py-status');
+    state.cell.classList.add('py-busy');
+    var result;
+    try {
+      var src = calls.map(function (c) { return 'print(' + JSON.stringify(c) + ', "->", repr(' + c + '))'; }).join('\n');
+      var truth = await py.globals.get('_run_isolated')(src);
+      var res = await fetch(GRADER, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          kind: 'trace', task: task, requirements: rubric, code: target.area.value,
+          calls: calls.join('\n'), truth: truth, reference: solution, answer: state.area.value
+        })
+      });
+      result = await res.json();
+    } catch (err) {
+      result = { error: 'Checking isn\'t available right now.' };
+    }
+    state.out.replaceChildren();
+    if (result.error) {
+      show(state, result.error, 'py-error');
+    } else if (result.verdict === 'correct') {
+      show(state, '✓ Correct', 'py-pass');
+      show(state, result.feedback, 'py-feedback');
+    } else {
+      show(state, 'Not yet', 'py-hint');
+      offerHint(state, result.feedback);
+    }
+    state.cell.classList.remove('py-busy');
+  }
+
   // A Hint button that swaps itself for the hint when clicked.
   function offerHint(state, text) {
     var ask = button('py-ask', null, 'Hint');
@@ -1161,7 +1264,10 @@ def _run_traced(src, names):
   // Traces for the concept cells, built ahead of time by build_traces.py and keyed by each cell's code.
   var tracesUrl = document.currentScript && document.currentScript.getAttribute('data-traces');
 
-  document.querySelectorAll('pre.py').forEach(build);
+  document.querySelectorAll('pre.py, pre.py-trace').forEach(function (pre) {
+    if (pre.classList.contains('py-trace')) buildTrace(pre);
+    else build(pre);
+  });
 
   if (tracesUrl) {
     fetch(tracesUrl).then(function (res) { return res.ok ? res.json() : {}; }).then(function (traces) {
